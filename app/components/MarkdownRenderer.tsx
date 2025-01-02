@@ -70,15 +70,25 @@ const MarkdownRenderer: React.FC<MarkdownRendererProps> = ({
       );
     },
     blockquote: ({ children }: { children: React.ReactNode }) => {
-      const textContent = React.Children.toArray(children)
-        .map((child) => (typeof child === "string" ? child : ""))
-        .join("");
+      const childrenArray = React.Children.toArray(children);
+      if (!childrenArray[0]) {
+        return <blockquote>{children}</blockquote>;
+      }
 
-      const match = textContent.match(/^\[!(\w+)\]([-+])?(?:\s+(.+))?/);
+      const firstChild = childrenArray[0];
+
+      if (typeof firstChild !== "object" || !("props" in firstChild)) {
+        return <blockquote>{children}</blockquote>;
+      }
+
+      const textContent = firstChild.props.children || "";
+
+      const match = String(textContent).match(/^\[!(\w+)\]([-+])?(?:\s+(.+))?/);
+
       if (match && !isNested) {
         const [, type, foldState, title] = match;
         // Remove only the first line that contains the callout syntax
-        const lines = textContent.split("\n");
+        const lines = String(textContent).split("\n");
         const cleanedContent = lines.slice(1).join("\n").trim();
         const calloutType = type.toLowerCase();
         const isFoldable = foldState === "+" || foldState === "-";

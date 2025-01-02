@@ -3,5 +3,6 @@
   "alwaysUpdateLinks": true,
   "newFileLocation": "current",
   "newLinkFormat": "absolute",
-  "attachmentFolderPath": "assets"
+  "attachmentFolderPath": "assets",
+  "useMarkdownLinks": true
 }

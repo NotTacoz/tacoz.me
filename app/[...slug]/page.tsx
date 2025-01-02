@@ -14,7 +14,7 @@ interface PostData {
   isFolder: boolean;
 }
 
-const ignoredFolders = [".obsidian", ".git", "node_modules"];
+const ignoredFolders = [".obsidian", ".git", "node_modules", "assets"];
 
 function getPostsData(dir: string, baseSlug: string = ""): PostData[] {
   const postsDirectory = path.join(process.cwd(), dir);
