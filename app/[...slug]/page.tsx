@@ -181,7 +181,7 @@ export default async function Post({ params }: PageProps) {
       return (
         <div className="space-y-8">
           <h1 className="text-4xl font-bold mb-4">
-            {params.slug[params.slug.length - 1]}
+            {decodeURIComponent(params.slug[params.slug.length - 1])}
           </h1>
           {description && (
             <div className="prose dark:prose-invert">
@@ -201,7 +201,7 @@ export default async function Post({ params }: PageProps) {
                   >
                     <h3 className="text-xl font-semibold text-yellow-400">
                       <Folder className="icon text-yellow-400 inline-block mr-2" />
-                      {folder.title}
+                      {decodeURIComponent(folder.title)}
                     </h3>
                   </Link>
                 ))}
