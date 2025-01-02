@@ -80,14 +80,14 @@ function estimateReadingTime(content: string): number {
 }
 
 interface PageProps {
-  params: {
+  params: Promise<{
     slug: string[];
-  };
+  }>;
 }
 
 export default async function Post({ params }: PageProps) {
-  const slugParams = await Promise.resolve(params.slug);
-  const slug = slugParams.join("/");
+  const resolvedParams = await params;
+  const slug = resolvedParams.slug.join("/");
   const fullPath = path.join(process.cwd(), "posts", slug);
 
   if (fs.existsSync(fullPath) || fs.existsSync(`${fullPath}.md`)) {
@@ -109,7 +109,7 @@ export default async function Post({ params }: PageProps) {
       return (
         <div className="space-y-8">
           <h1 className="text-4xl font-bold mb-4">
-            {params.slug[params.slug.length - 1]}
+            {(await params).slug[(await params).slug.length - 1]}
           </h1>
           {description && (
             <div className="prose dark:prose-invert">

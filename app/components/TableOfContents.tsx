@@ -17,11 +17,17 @@ const TableOfContents: React.FC = () => {
     const headers = Array.from(
       document.querySelectorAll("h1, h2, h3, h4, h5, h6")
     );
-    const tocItems = headers.map((header) => ({
-      id: header.id,
-      text: header.textContent || "",
-      level: parseInt(header.tagName[1]),
-    }));
+    const tocItems: TOCItem[] = headers.map((header, index) => {
+      const headerId = header.id || `header-${index}`;
+      if (!header.id) {
+        header.id = headerId; // Assign the generated id to the header if it doesn't have one
+      }
+      return {
+        id: headerId,
+        text: header.textContent?.trim() || "",
+        level: parseInt(header.tagName.substring(1), 10),
+      };
+    });
     setToc(tocItems);
   }, []);
 
@@ -43,9 +49,9 @@ const TableOfContents: React.FC = () => {
       </button>
       {isOpen && (
         <ul className="space-y-2">
-          {toc.map((item) => (
+          {toc.map((item, index) => (
             <li
-              key={item.id}
+              key={`${item.id}-${index}`}
               style={{ marginLeft: `${(item.level - 1) * 0.5}rem` }}
             >
               <button

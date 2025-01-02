@@ -13,9 +13,12 @@ const spaceMono = Space_Mono({
 });
 
 export const metadata = {
-  title: "Monospace Garden",
+  title: "tacoz.me",
   description:
     "A unique digital garden built with Next.js and Obsidian Markdown",
+  icons: {
+    icon: "/favicon.ico",
+  },
 };
 
 export default function RootLayout({

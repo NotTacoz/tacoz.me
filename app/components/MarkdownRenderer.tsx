@@ -1,3 +1,4 @@
+// Start of Selection
 "use client";
 
 import React, { useState } from "react";
@@ -12,6 +13,59 @@ interface MarkdownRendererProps {
   content: string;
   isNested?: boolean;
 }
+
+const Blockquote: React.FC<{
+  children: React.ReactNode;
+  isNested: boolean;
+}> = ({ children, isNested }) => {
+  const childrenArray = React.Children.toArray(children);
+  if (
+    !childrenArray[0] ||
+    typeof childrenArray[0] !== "object" ||
+    !("props" in childrenArray[0])
+  ) {
+    return <blockquote>{children}</blockquote>;
+  }
+
+  const textContent = childrenArray[0].props.children?.[0] || "";
+  const match = String(textContent).match(/^\[!(\w+)\]([-+])?(?:\s+(.+))?/);
+
+  if (match && !isNested) {
+    const [, type, foldState, title] = match;
+    const lines = String(textContent).split("\n");
+    const cleanedContent = lines.slice(1).join("\n");
+    const calloutType = type.toLowerCase();
+    const isFoldable = foldState === "+" || foldState === "-";
+    const defaultExpanded = foldState !== "-";
+    const [isExpanded, setIsExpanded] = useState(defaultExpanded);
+
+    const displayTitle = title || type.charAt(0).toUpperCase() + type.slice(1);
+
+    return (
+      <div
+        className={`${styles.callout} ${styles[`callout-${calloutType}`]} ${
+          isFoldable ? styles.foldable : ""
+        } ${isExpanded ? styles.expanded : ""}`}
+      >
+        <div
+          className={styles["callout-title"]}
+          onClick={() => isFoldable && setIsExpanded(!isExpanded)}
+        >
+          <strong>{displayTitle}</strong>
+          {isFoldable && (
+            <span className={styles["fold-indicator"]}>
+              {isExpanded ? "−" : "+"}
+            </span>
+          )}
+        </div>
+        <div className={styles["callout-content"]}>
+          <MarkdownRenderer content={cleanedContent} isNested={true} />
+        </div>
+      </div>
+    );
+  }
+  return <blockquote>{children}</blockquote>;
+};
 
 const MarkdownRenderer: React.FC<MarkdownRendererProps> = ({
   content,
@@ -99,56 +153,9 @@ const MarkdownRenderer: React.FC<MarkdownRendererProps> = ({
         </Link>
       );
     },
-    blockquote: ({ children }: { children: React.ReactNode }) => {
-      const childrenArray = React.Children.toArray(children);
-      if (
-        !childrenArray[0] ||
-        typeof childrenArray[0] !== "object" ||
-        !("props" in childrenArray[0])
-      ) {
-        return <blockquote>{children}</blockquote>;
-      }
-
-      const textContent = childrenArray[0].props.children?.[0] || "";
-      const match = String(textContent).match(/^\[!(\w+)\]([-+])?(?:\s+(.+))?/);
-
-      if (match && !isNested) {
-        const [, type, foldState, title] = match;
-        const lines = String(textContent).split("\n");
-        const cleanedContent = lines.slice(1).join("\n");
-        const calloutType = type.toLowerCase();
-        const isFoldable = foldState === "+" || foldState === "-";
-        const defaultExpanded = foldState !== "-";
-        const [isExpanded, setIsExpanded] = useState(defaultExpanded);
-
-        const displayTitle =
-          title || type.charAt(0).toUpperCase() + type.slice(1);
-
-        return (
-          <div
-            className={`${styles.callout} ${styles[`callout-${calloutType}`]} ${
-              isFoldable ? styles.foldable : ""
-            } ${isExpanded ? styles.expanded : ""}`}
-          >
-            <div
-              className={styles["callout-title"]}
-              onClick={() => isFoldable && setIsExpanded(!isExpanded)}
-            >
-              <strong>{displayTitle}</strong>
-              {isFoldable && (
-                <span className={styles["fold-indicator"]}>
-                  {isExpanded ? "−" : "+"}
-                </span>
-              )}
-            </div>
-            <div className={styles["callout-content"]}>
-              <MarkdownRenderer content={cleanedContent} isNested={true} />
-            </div>
-          </div>
-        );
-      }
-      return <blockquote>{children}</blockquote>;
-    },
+    blockquote: ({ children }: { children: React.ReactNode }) => (
+      <Blockquote children={children} isNested={isNested} />
+    ),
   };
 
   return <ReactMarkdown components={components}>{content}</ReactMarkdown>;
