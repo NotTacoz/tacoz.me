@@ -4,7 +4,6 @@ import React, { useState, useEffect } from "react";
 import ReactMarkdown from "react-markdown";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { tomorrow } from "react-syntax-highlighter/dist/esm/styles/prism";
-import Image from "next/image";
 import Link from "next/link";
 import styles from "./Callout.module.css";
 
@@ -92,94 +91,71 @@ const MarkdownRenderer: React.FC<MarkdownRendererProps> = ({
   content,
   isNested = false,
 }) => {
-  const components = {
-    code: ({
-      inline,
-      className,
-      children,
-    }: {
-      inline?: boolean;
-      className?: string;
-      children: React.ReactNode;
-    }) => {
-      const match = /language-(\w+)/.exec(className || "");
-      return !inline && match ? (
-        <SyntaxHighlighter style={tomorrow} language={match[1]} PreTag="div">
-          {String(children).replace(/\n$/, "")}
-        </SyntaxHighlighter>
-      ) : (
-        <code className={className}>{children}</code>
-      );
-    },
-    img: ({ src, alt }: { src?: string; alt?: string }) => {
-      if (!src) return null;
-      const normalizedSrc = src.startsWith("assets/") ? `/${src}` : src;
-      return (
-        <span className={styles.imageWrapper}>
-          <Image
-            src={normalizedSrc}
-            alt={alt || ""}
-            width={800}
-            height={600}
-            className={styles.image}
-            priority
-          />
-        </span>
-      );
-    },
-    text: ({ children }: { children: React.ReactNode }) => {
-      if (typeof children !== "string") return <>{children}</>;
+  return (
+    <ReactMarkdown
+      components={{
+        img: ({ alt, src, ...props }) => {
+          if (!src) return null;
 
-      const parts = children.split(/\[\[([^\]]+)\]\]/g);
+          // Parse size from alt text (e.g., "100" in ![100](image.png))
+          const size = alt ? parseInt(alt) : undefined;
+          const height = size && !isNaN(size) ? size : undefined;
 
-      return (
-        <>
-          {parts.map((part, index) => {
-            if (index % 2 === 1) {
-              const [link, alias] = part.split("|").map((s) => s.trim());
-              const displayText = alias || link;
-              const href = link
-                .toLowerCase()
-                .replace(/ /g, "-")
-                .replace(/\.md$/, "");
+          // Handle relative paths
+          const imageSrc = src.startsWith("../")
+            ? src.replace(/^\.\.\/\.\.\//, "/")
+            : src;
 
-              return (
-                <Link key={index} href={`/${href}`} className={styles.wikilink}>
-                  {displayText}
-                </Link>
-              );
-            }
-            return part;
-          })}
-        </>
-      );
-    },
-    a: ({ href, children }: { href?: string; children: React.ReactNode }) => {
-      if (!href) return <>{children}</>;
-
-      const isExternal = href.startsWith("http") || href.startsWith("//");
-      if (isExternal) {
-        return (
-          <a href={href} target="_blank" rel="noopener noreferrer">
-            {children}
-          </a>
-        );
-      }
-
-      const cleanHref = href.replace(/\.md$/, "").replace(/^\//, "");
-
-      return (
-        <Link href={`/${cleanHref}`} className={styles.wikilink}>
-          {children}
-        </Link>
-      );
-    },
-    blockquote: ({ children }: { children: React.ReactNode }) => (
-      <Blockquote isNested={isNested}>{children}</Blockquote>
-    ),
-  };
-
-  return <ReactMarkdown components={components}>{content}</ReactMarkdown>;
+          return (
+            <span className="flex justify-center items-center w-full">
+              <img
+                src={imageSrc}
+                alt={alt}
+                height={height}
+                style={
+                  height ? { height: `${height}px`, width: "auto" } : undefined
+                }
+                className="rounded-lg"
+                {...props}
+              />
+            </span>
+          );
+        },
+        blockquote: ({ children }) => (
+          <Blockquote isNested={isNested}>{children}</Blockquote>
+        ),
+        a: ({ href, children }) => {
+          if (!href) return <>{children}</>;
+          return href.startsWith("/") || href.startsWith("#") ? (
+            <Link href={href}>{children}</Link>
+          ) : (
+            <a href={href} target="_blank" rel="noopener noreferrer">
+              {children}
+            </a>
+          );
+        },
+        code({ inline, className, children, ...props }) {
+          const match = /language-(\w+)/.exec(className || "");
+          return !inline && match ? (
+            <SyntaxHighlighter
+              style={tomorrow as any}
+              language={match[1]}
+              PreTag="div"
+              {...props}
+            >
+              {String(children).replace(/\n$/, "")}
+            </SyntaxHighlighter>
+          ) : (
+            <code className={className} {...props}>
+              {children}
+            </code>
+          );
+        },
+      }}
+    >
+      {content}
+    </ReactMarkdown>
+  );
 };
 
 export default MarkdownRenderer;

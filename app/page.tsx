@@ -31,7 +31,7 @@ function getPostsData(dir: string, baseSlug: string = ""): PostData[] {
       const isDirectory = fs.lstatSync(fullPath).isDirectory();
       const slug = path.join(
         baseSlug,
-        isDirectory ? `${item}/` : `${item.replace(/\.md$/, "")}/`
+        isDirectory ? `${item}/` : item.replace(/\.md$/, "")
       );
 
       if (isDirectory) {

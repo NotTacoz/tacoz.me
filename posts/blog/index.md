@@ -1,0 +1,1 @@
+This is where I share my personal thoughts on various topics. The topics will be whatever I am interested in / looking at

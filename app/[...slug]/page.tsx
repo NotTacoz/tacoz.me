@@ -28,13 +28,13 @@ function getPostsData(dir: string, baseSlug: string = ""): PostData[] {
       const isDirectory = fs.lstatSync(fullPath).isDirectory();
       const slug = path.join(
         baseSlug,
-        isDirectory ? item : item.replace(/\.md$/, "")
+        isDirectory ? `${item}/` : item.replace(/\.md$/, "")
       );
 
       if (isDirectory) {
         if (!ignoredFolders.includes(item)) {
           posts.push({
-            slug,
+            slug: encodeURIComponent(slug),
             title: item,
             date: new Date().toISOString(),
             isFolder: true,
@@ -45,7 +45,7 @@ function getPostsData(dir: string, baseSlug: string = ""): PostData[] {
         const fileContents = fs.readFileSync(fullPath, "utf8");
         const { data } = matter(fileContents);
         posts.push({
-          slug,
+          slug: encodeURIComponent(slug),
           title: data.title || item.replace(/\.md$/, ""),
           date: data.date || new Date().toISOString(),
           isFolder: false,
@@ -59,18 +59,47 @@ function getPostsData(dir: string, baseSlug: string = ""): PostData[] {
 
 export async function generateStaticParams() {
   const posts = getPostsData("posts");
+
+  // Get all possible paths by splitting each slug
+  const allPaths = posts.reduce((paths: { slug: string[] }[], post) => {
+    const segments = decodeURIComponent(post.slug)
+      .split(path.sep)
+      .filter(Boolean);
+
+    // Add the full path
+    paths.push({ slug: segments });
+
+    // Add all parent paths
+    for (let i = 1; i < segments.length; i++) {
+      const parentPath = segments.slice(0, i);
+      // Only add if not already included
+      if (!paths.some((p) => p.slug.join("/") === parentPath.join("/"))) {
+        paths.push({ slug: parentPath });
+      }
+    }
+
+    return paths;
+  }, []);
+
+  // Add any additional static paths with proper encoding
   const additionalPaths = [
+    { slug: ["templates"] },
     { slug: ["templates", "learning"] },
     { slug: ["learning"] },
     { slug: ["notes"] },
+    { slug: ["notes", "Books"] },
     { slug: ["references"] },
+    { slug: ["references", "Math References"] },
   ];
-  return [
-    ...posts.map((post) => ({
-      slug: post.slug.split(path.sep),
-    })),
-    ...additionalPaths,
-  ];
+
+  // Combine and deduplicate paths
+  const combinedPaths = [...allPaths, ...additionalPaths];
+  const uniquePaths = combinedPaths.filter(
+    (path, index, self) =>
+      index === self.findIndex((p) => p.slug.join("/") === path.slug.join("/"))
+  );
+
+  return uniquePaths;
 }
 
 function estimateReadingTime(content: string): number {
@@ -87,7 +116,7 @@ interface PageProps {
 }
 
 export default async function Post({ params }: PageProps) {
-  const slug = params.slug.join("/");
+  const slug = params.slug.map(decodeURIComponent).join("/");
   const fullPath = path.join(process.cwd(), "posts", slug);
 
   if (fs.existsSync(fullPath) || fs.existsSync(`${fullPath}.md`)) {
@@ -96,7 +125,7 @@ export default async function Post({ params }: PageProps) {
       : fs.lstatSync(`${fullPath}.md`);
     if (stats.isDirectory()) {
       // Render folder page
-      const posts = getPostsData(fullPath);
+      const posts = getPostsData(path.join("posts", slug), slug);
       const indexPath = path.join(fullPath, "index.md");
       let description = "";
 

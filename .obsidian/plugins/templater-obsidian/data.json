@@ -15,24 +15,24 @@
   "enable_folder_templates": true,
   "folder_templates": [
     {
-      "folder": "learning",
-      "template": "templates/learning.md"
+      "folder": "posts/learning",
+      "template": "posts/templates/learning.md"
     },
     {
-      "folder": "notes",
-      "template": "templates/notes.md"
+      "folder": "posts/notes",
+      "template": "posts/templates/notes.md"
     },
     {
-      "folder": "references",
-      "template": "templates/references.md"
+      "folder": "posts/references",
+      "template": "posts/templates/references.md"
     },
     {
-      "folder": "blog",
-      "template": "templates/blog.md"
+      "folder": "posts/blog",
+      "template": "posts/templates/blog.md"
     },
     {
       "folder": "/",
-      "template": "templates/general.md"
+      "template": "posts/templates/general.md"
     }
   ],
   "enable_file_templates": false,
