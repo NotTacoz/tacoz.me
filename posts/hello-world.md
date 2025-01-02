@@ -12,25 +12,19 @@ this is [page](page.md)
 ![](../assets/GgDBKAZX0AAi8C5.jpeg)
 
 
-  
 
 ## callouts
 
 >[!info] Here's a callout block.
 
->It supports **Markdown**, [[Internal link|Wikilinks]], and [[Embed files|embeds]]!
+>It supports **Markdown**, and [embeds](https://youtube.com)!
 
-  
+>[!warning] Warning
 
->[!warning]+ Expandable Warning
+>[!Info] This is an Info callout
+>Wow no way
+>text text text
 
->This warning callout is expandable and starts expanded
-
-  
-
->[!tip]- Collapsed Tip
-
->This tip callout starts collapsed
 ## Code Example
 
 ```javascript

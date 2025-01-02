@@ -1,12 +1,4 @@
 {
-  "editor:insert-wikilink": [
-    {
-      "modifiers": [
-        "Mod"
-      ],
-      "key": "K"
-    }
-  ],
   "editor:insert-link": [],
   "editor:set-heading-2": [
     {
@@ -60,6 +52,23 @@
         "Shift"
       ],
       "key": "5"
+    }
+  ],
+  "obsidian-git:commit-push-specified-message": [
+    {
+      "modifiers": [
+        "Alt",
+        "Shift"
+      ],
+      "key": "B"
+    }
+  ],
+  "editor:insert-wikilink": [
+    {
+      "modifiers": [
+        "Mod"
+      ],
+      "key": "K"
     }
   ]
 }
