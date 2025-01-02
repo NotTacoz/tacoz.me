@@ -5,6 +5,7 @@ import ReactMarkdown from "react-markdown";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { tomorrow } from "react-syntax-highlighter/dist/esm/styles/prism";
 import Image from "next/image";
+import Link from "next/link";
 import styles from "./Callout.module.css";
 
 interface MarkdownRendererProps {
@@ -16,13 +17,22 @@ const MarkdownRenderer: React.FC<MarkdownRendererProps> = ({
   content,
   isNested = false,
 }) => {
-  // Process Obsidian-style image syntax
-  const processedContent = content.replace(/!\[\[(.*?)\]\]/g, (match, p1) => {
-    const [fileName, alt] = p1.split("|");
-    // Remove 'assets/' if it's already in the path
-    const cleanFileName = fileName.trim().replace(/^assets\//, "");
-    return `![${alt || cleanFileName}](/assets/${cleanFileName})`;
-  });
+  // Process Obsidian-style image syntax and ensure proper asset path handling
+  const processedContent = content
+    // Handle ![[image.png]] syntax
+    .replace(/!\[\[(.*?)\]\]/g, (match, p1) => {
+      const [fileName, alt] = p1.split("|");
+      const cleanFileName = fileName.trim().replace(/^assets\//, "");
+      return `![${alt || cleanFileName}](/posts/assets/${cleanFileName})`;
+    })
+    // Handle standard ![alt](path) syntax
+    .replace(/!\[(.*?)\]\((.*?)\)/g, (match, alt, path) => {
+      if (path.includes("assets/")) {
+        const cleanPath = path.replace(/^assets\//, "");
+        return `![${alt}](/posts/assets/${cleanPath})`;
+      }
+      return match;
+    });
 
   const components = {
     code: ({
@@ -44,8 +54,7 @@ const MarkdownRenderer: React.FC<MarkdownRendererProps> = ({
       );
     },
     img: ({ src, alt }: { src?: string; alt?: string }) => {
-      if (src?.startsWith("/assets/")) {
-        // Wrap in span instead of div to avoid hydration issues
+      if (src?.startsWith("/posts/assets/")) {
         return (
           <span className={styles.imageWrapper}>
             <Image
@@ -61,12 +70,53 @@ const MarkdownRenderer: React.FC<MarkdownRendererProps> = ({
       }
       return <img src={src} alt={alt || ""} />;
     },
-    a: ({ href, children }: { href?: string; children: React.ReactNode }) => {
-      // Handle wikilinks
+    text: ({ children }: { children: React.ReactNode }) => {
+      if (typeof children !== "string") return <>{children}</>;
+
+      // Process wikilinks [[Page Name]]
+      const parts = children.split(/\[\[([^\]]+)\]\]/g);
       return (
-        <a href={href} target="_blank" rel="noopener noreferrer">
+        <>
+          {parts.map((part, index) => {
+            if (index % 2 === 1) {
+              // This is a wikilink
+              const [link, alias] = part.split("|").map((s) => s.trim());
+              const displayText = alias || link;
+              const href = link
+                .toLowerCase()
+                .replace(/ /g, "-")
+                .replace(/\.md$/, "");
+
+              return (
+                <Link key={index} href={`/${href}`} className={styles.wikilink}>
+                  {displayText}
+                </Link>
+              );
+            }
+            return part;
+          })}
+        </>
+      );
+    },
+    a: ({ href, children }: { href?: string; children: React.ReactNode }) => {
+      if (!href) return <>{children}</>;
+
+      const isExternal = href.startsWith("http") || href.startsWith("//");
+      if (isExternal) {
+        return (
+          <a href={href} target="_blank" rel="noopener noreferrer">
+            {children}
+          </a>
+        );
+      }
+
+      // Handle internal links
+      const cleanHref = href.replace(/\.md$/, "").replace(/^\//, "");
+
+      return (
+        <Link href={`/${cleanHref}`} className={styles.wikilink}>
           {children}
-        </a>
+        </Link>
       );
     },
     blockquote: ({ children }: { children: React.ReactNode }) => {
@@ -76,31 +126,21 @@ const MarkdownRenderer: React.FC<MarkdownRendererProps> = ({
       }
 
       const firstChild = childrenArray[0];
-
       if (typeof firstChild !== "object" || !("props" in firstChild)) {
         return <blockquote>{children}</blockquote>;
       }
 
-      const textContent = firstChild.props.children || "";
-
+      const textContent = firstChild.props.children?.[0] || "";
       const match = String(textContent).match(/^\[!(\w+)\]([-+])?(?:\s+(.+))?/);
 
       if (match && !isNested) {
         const [, type, foldState, title] = match;
-        // Remove only the first line that contains the callout syntax
         const lines = String(textContent).split("\n");
-        const cleanedContent = lines.slice(1).join("\n").trim();
+        const cleanedContent = lines.slice(1).join("\n");
         const calloutType = type.toLowerCase();
         const isFoldable = foldState === "+" || foldState === "-";
         const defaultExpanded = foldState !== "-";
-
-        // Calculate initial expanded state
-        const initialExpanded = defaultExpanded;
-        const [isExpanded, setIsExpanded] = useState(initialExpanded);
-
-        React.useEffect(() => {
-          setIsExpanded(initialExpanded);
-        }, [initialExpanded]);
+        const [isExpanded, setIsExpanded] = useState(defaultExpanded);
 
         const displayTitle =
           title || type.charAt(0).toUpperCase() + type.slice(1);
@@ -129,29 +169,6 @@ const MarkdownRenderer: React.FC<MarkdownRendererProps> = ({
         );
       }
       return <blockquote>{children}</blockquote>;
-    },
-    text: ({ children }: { children: React.ReactNode }) => {
-      if (typeof children !== "string") return <>{children}</>;
-
-      // Process wikilinks
-      const parts = children.split(/\[\[([^\]]+)\]\]/g);
-      return (
-        <>
-          {parts.map((part, index) => {
-            if (index % 2 === 1) {
-              const [link, alias] = part.split("|").map((s) => s.trim());
-              const displayText = alias || link;
-
-              return (
-                <a key={index} href={`/${link}`} className={styles.wikilink}>
-                  {displayText}
-                </a>
-              );
-            }
-            return part;
-          })}
-        </>
-      );
     },
   };
 
