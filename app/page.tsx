@@ -74,8 +74,15 @@ export default function Home() {
         </div>
         <h1 className="text-4xl font-bold">tacoz.me</h1>
         <p className="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
-          Welcome to my digital garden. This is where I share my thoughts,
-          notes, and learnings. Feel free to explore and learn together!
+          Hi - I am{" "}
+          <a href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR2CPvKNPELNr1HjZdSU6J5kuUbUadZ4WYLLA&s">
+            tacoz
+          </a>
+        </p>
+        <p className="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+          this is a collection of my <Link href="/blog">thoughts</Link>,{" "}
+          <Link href="/notes">notes</Link>, and{" "}
+          <Link href="/learnings">learnings</Link>! have a look around:-)
         </p>
       </div>
 
