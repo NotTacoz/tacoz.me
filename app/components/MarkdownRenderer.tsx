@@ -107,7 +107,11 @@ const MarkdownRenderer: React.FC<MarkdownRendererProps> = ({
             ? src.replace(/^\.\.\/\.\.\//, "/")
             : src.startsWith("../")
             ? src.replace(/^\.\.\//, "/")
+            : !src.startsWith("/") && !src.startsWith("http")
+            ? `/${src}`
             : src;
+
+          console.log("Transformed src:", imageSrc);
 
           return (
             <span className="flex justify-center items-center w-full">
