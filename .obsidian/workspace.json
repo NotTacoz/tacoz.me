@@ -4,21 +4,17 @@
     "type": "split",
     "children": [
       {
-        "id": "b4e463e5a6459ea1",
+        "id": "c71c095e1105fc5c",
         "type": "tabs",
         "children": [
           {
-            "id": "dd2cdf30c6b84b07",
+            "id": "fc4419acf5c9bde1",
             "type": "leaf",
             "state": {
-              "type": "markdown",
-              "state": {
-                "file": "posts/hello-world.md",
-                "mode": "source",
-                "source": false
-              },
+              "type": "empty",
+              "state": {},
               "icon": "lucide-file",
-              "title": "hello-world"
+              "title": "New tab"
             }
           }
         ]
@@ -93,7 +89,6 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "posts/hello-world.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -103,7 +98,7 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "Backlinks for hello-world"
+              "title": "Backlinks"
             }
           },
           {
@@ -112,12 +107,11 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "posts/hello-world.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               },
               "icon": "links-going-out",
-              "title": "Outgoing links from hello-world"
+              "title": "Outgoing links"
             }
           },
           {
@@ -138,11 +132,9 @@
             "type": "leaf",
             "state": {
               "type": "outline",
-              "state": {
-                "file": "posts/hello-world.md"
-              },
+              "state": {},
               "icon": "lucide-list",
-              "title": "Outline of hello-world"
+              "title": "Outline"
             }
           }
         ]
@@ -162,8 +154,9 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "dd2cdf30c6b84b07",
+  "active": "fc4419acf5c9bde1",
   "lastOpenFiles": [
+    "posts/hello-world.md",
     "out/_next/static/chunks/app/blog/[slug]/page-f849569e347310ce.js",
     "out/_next/static/chunks/app/layout-a42a1f44ee806162.js",
     "out/_next/static/css/2cc4bb34c50c387b.css",
@@ -174,7 +167,6 @@
     "out/_next/static/I6e69OWmLWrbPH04aZqCV/_buildManifest.js",
     "out/_next/static/I6e69OWmLWrbPH04aZqCV/_ssgManifest.js",
     "out/_next/static/I6e69OWmLWrbPH04aZqCV",
-    "out/_next/I6e69OWmLWrbPH04aZqCV",
     "node_modules/next/license.md",
     "node_modules/inline-style-parser/CHANGELOG.md",
     "node_modules/string-width-cjs/node_modules/strip-ansi/readme.md",

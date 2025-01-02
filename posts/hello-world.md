@@ -1,10 +1,9 @@
 ---
-title: "Hello World"
-date: "2024-01-01"
+title: Hello World
+date: 2024-01-01
+tags:
+  - general
 ---
-
-# Hello World
-
 This is my first blog post! Welcome to my digital garden where I share my thoughts and learnings.
 
 ## Code Example
