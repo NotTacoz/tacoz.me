@@ -9,33 +9,74 @@
 
 .dark {
   --foreground-rgb: 255, 255, 255;
-  --background-rgb: 15, 23, 42;
+  --background-rgb: 18, 18, 18;
 }
 
 body {
   color: rgb(var(--foreground-rgb));
-  background-color: rgb(var(--background-rgb));
+  background: rgb(var(--background-rgb));
+  font-family: var(--font-space-mono), monospace;
+  transition: color 0.3s ease, background-color 0.3s ease;
+}
+
+@layer base {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-bold mb-4;
+  }
+
+  h1 {
+    @apply text-4xl;
+  }
+
+  h2 {
+    @apply text-3xl;
+  }
+
+  h3 {
+    @apply text-2xl;
+  }
+
+  a {
+    @apply text-blue-600 dark:text-blue-400 hover:underline;
+  }
 }
 
 .prose {
-  max-width: 65ch;
+  @apply max-w-none;
 }
 
 .prose.dark {
-  --tw-prose-body: theme('colors.gray[300]');
-  --tw-prose-headings: theme('colors.white');
-  --tw-prose-links: theme('colors.blue[400]');
-  --tw-prose-bold: theme('colors.white');
-  --tw-prose-counters: theme('colors.gray[400]');
-  --tw-prose-bullets: theme('colors.gray[600]');
-  --tw-prose-quotes: theme('colors.gray[100]');
-  --tw-prose-quote-borders: theme('colors.gray[700]');
-  --tw-prose-captions: theme('colors.gray[400]');
-  --tw-prose-code: theme('colors.white');
-  --tw-prose-pre-code: theme('colors.gray[300]');
-  --tw-prose-pre-bg: theme('colors.gray[800]');
-  --tw-prose-hr: theme('colors.gray[700]');
-  --tw-prose-th-borders: theme('colors.gray[600]');
-  --tw-prose-td-borders: theme('colors.gray[700]');
+  @apply prose-invert;
 }
 
+.terminal-window {
+  @apply bg-gray-900 text-green-400 p-4 rounded-lg shadow-lg font-mono text-sm overflow-hidden;
+}
+
+.folder-icon {
+  @apply inline-block w-5 h-5 mr-2 bg-yellow-400 rounded;
+}
+
+.file-icon {
+  @apply inline-block w-5 h-5 mr-2 bg-blue-400 rounded-sm;
+}
+
+.typing-effect::after {
+  content: "|";
+  animation: blink 1s step-end infinite;
+}
+
+@keyframes blink {
+  from,
+  to {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+}

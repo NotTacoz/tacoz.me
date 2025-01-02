@@ -1,33 +1,42 @@
-import './globals.css'
-import { Inter } from 'next/font/google'
-import { Navigation } from './components/Navigation'
-import { ThemeProvider } from './providers'
+import "./globals.css";
+import { Space_Mono } from "next/font/google";
+import { Navigation } from "./components/Navigation";
+import { ThemeProvider } from "./providers";
 
-const inter = Inter({ subsets: ['latin'] })
+const spaceMono = Space_Mono({
+  weight: ["400", "700"],
+  subsets: ["latin"],
+  variable: "--font-space-mono",
+});
 
 export const metadata = {
-  title: 'Obsidian Blog',
-  description: 'A blog built with Next.js and Obsidian Markdown',
-}
+  title: "Monospace Garden",
+  description:
+    "A unique digital garden built with Next.js and Obsidian Markdown",
+};
 
 export default function RootLayout({
   children,
 }: {
-  children: React.ReactNode
+  children: React.ReactNode;
 }) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <body className={`${inter.className} text-gray-900 dark:text-white transition-colors duration-200`}>
+    <html lang="en" suppressHydrationWarning className={spaceMono.variable}>
+      <body className="bg-white dark:bg-gray-900 text-gray-900 dark:text-white transition-colors duration-200 font-mono">
         <ThemeProvider>
-          <Navigation />
-          <div className="pt-16">
-            <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-              <main>{children}</main>
-            </div>
+          <div className="min-h-screen flex flex-col">
+            <Navigation />
+            <main className="flex-grow container mx-auto px-4 py-8 mt-16">
+              {children}
+            </main>
+            <footer className="text-center py-4 text-sm">
+              <p>
+                &copy; {new Date().getFullYear()} tacoz.me. All rights reserved.
+              </p>
+            </footer>
           </div>
         </ThemeProvider>
       </body>
     </html>
-  )
+  );
 }
-

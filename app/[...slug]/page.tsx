@@ -12,6 +12,8 @@ interface PostData {
   isFolder: boolean;
 }
 
+const ignoredFolders = [".obsidian", ".git", "node_modules"];
+
 function getPostsData(dir: string, baseSlug: string = ""): PostData[] {
   const postsDirectory = path.join(process.cwd(), dir);
   let posts: PostData[] = [];
@@ -28,13 +30,15 @@ function getPostsData(dir: string, baseSlug: string = ""): PostData[] {
       );
 
       if (isDirectory) {
-        posts.push({
-          slug,
-          title: item,
-          date: new Date().toISOString(),
-          isFolder: true,
-        });
-        posts = posts.concat(getPostsData(fullPath, slug));
+        if (!ignoredFolders.includes(item)) {
+          posts.push({
+            slug,
+            title: item,
+            date: new Date().toISOString(),
+            isFolder: true,
+          });
+          posts = posts.concat(getPostsData(fullPath, slug));
+        }
       } else if (item.endsWith(".md") && item !== "index.md") {
         const fileContents = fs.readFileSync(fullPath, "utf8");
         const { data } = matter(fileContents);
@@ -58,7 +62,11 @@ export async function generateStaticParams() {
   }));
 }
 
-export default function Post({ params }: { params: { slug: string[] } }) {
+export default function Post({ params }: { params: { slug?: string[] } }) {
+  if (!params.slug) {
+    notFound();
+  }
+
   const slug = params.slug.join("/");
   const fullPath = path.join(process.cwd(), "posts", slug);
 
@@ -88,25 +96,48 @@ export default function Post({ params }: { params: { slug: string[] } }) {
               <MarkdownRenderer content={description} />
             </div>
           )}
-          <div className="space-y-4">
-            {posts.map((post) => (
-              <Link
-                key={post.slug}
-                href={`/${post.slug}`}
-                className="block p-6 bg-gray-50 dark:bg-gray-800 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors duration-200"
-              >
-                <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">
-                  {post.title} {post.isFolder && "(Folder)"}
-                </h3>
-                <time className="text-sm text-gray-600 dark:text-gray-400">
-                  {new Date(post.date).toLocaleDateString("en-US", {
-                    year: "numeric",
-                    month: "long",
-                    day: "numeric",
-                  })}
-                </time>
-              </Link>
-            ))}
+          <div className="grid md:grid-cols-2 gap-8">
+            <div className="space-y-4">
+              <h2 className="text-2xl font-semibold">Folders</h2>
+              {posts
+                .filter((post) => post.isFolder)
+                .map((folder) => (
+                  <Link
+                    key={folder.slug}
+                    href={`/${folder.slug}`}
+                    className="block p-4 bg-gray-100 dark:bg-gray-800 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors duration-200"
+                  >
+                    <h3 className="text-xl font-semibold">
+                      <span className="folder-icon"></span>
+                      {folder.title}
+                    </h3>
+                  </Link>
+                ))}
+            </div>
+            <div className="space-y-4">
+              <h2 className="text-2xl font-semibold">Files</h2>
+              {posts
+                .filter((post) => !post.isFolder)
+                .map((post) => (
+                  <Link
+                    key={post.slug}
+                    href={`/${post.slug}`}
+                    className="block p-4 bg-gray-100 dark:bg-gray-800 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors duration-200"
+                  >
+                    <h3 className="text-xl font-semibold mb-2">
+                      <span className="file-icon"></span>
+                      {post.title}
+                    </h3>
+                    <time className="text-sm text-gray-600 dark:text-gray-400">
+                      {new Date(post.date).toLocaleDateString("en-US", {
+                        year: "numeric",
+                        month: "long",
+                        day: "numeric",
+                      })}
+                    </time>
+                  </Link>
+                ))}
+            </div>
           </div>
         </div>
       );

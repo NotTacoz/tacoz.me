@@ -54,38 +54,55 @@ function getPostsData(dir: string, baseSlug: string = ""): PostData[] {
 }
 
 export default function Home() {
-  const posts = getPostsData("posts");
+  const allPosts = getPostsData("posts");
+  const folders = allPosts.filter((post) => post.isFolder);
+  const posts = allPosts.filter((post) => !post.isFolder);
   posts.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 
   return (
     <div className="space-y-16">
       <div className="text-center space-y-8">
-        <div className="w-20 h-20 mx-auto bg-purple-100 dark:bg-purple-900 rounded-lg flex items-center justify-center">
-          <span className="text-2xl">📚</span>
+        <div className="terminal-window mx-auto w-16 h-16 flex items-center justify-center">
+          <span className="text-4xl">📚</span>
         </div>
-        <h1 className="text-4xl font-bold text-gray-900 dark:text-white">
-          Obsidian Blog
-        </h1>
+        <h1 className="text-4xl font-bold">tacoz.me</h1>
         <p className="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
           Welcome to my digital garden. This is where I share my thoughts,
           notes, and learnings. Feel free to explore and learn together!
         </p>
       </div>
 
-      <div className="space-y-8">
-        <h2 className="text-2xl font-semibold text-gray-900 dark:text-white">
-          Latest Posts
-        </h2>
-        {posts.length > 0 ? (
+      <div className="grid md:grid-cols-2 gap-8">
+        <div className="space-y-8">
+          <h2 className="text-2xl font-semibold">Folders</h2>
+          <div className="space-y-4">
+            {folders.map((folder) => (
+              <Link
+                key={folder.slug}
+                href={`/${folder.slug}`}
+                className="block p-4 bg-gray-100 dark:bg-gray-800 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors duration-200"
+              >
+                <h3 className="text-xl font-semibold mb-2">
+                  <span className="folder-icon"></span>
+                  {folder.title}
+                </h3>
+              </Link>
+            ))}
+          </div>
+        </div>
+
+        <div className="space-y-8">
+          <h2 className="text-2xl font-semibold">Latest Posts</h2>
           <div className="space-y-4">
             {posts.map((post) => (
               <Link
                 key={post.slug}
                 href={`/${post.slug}`}
-                className="block p-6 bg-gray-50 dark:bg-gray-800 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors duration-200"
+                className="block p-4 bg-gray-100 dark:bg-gray-800 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors duration-200"
               >
-                <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">
-                  {post.title} {post.isFolder && "(Folder)"}
+                <h3 className="text-xl font-semibold mb-2">
+                  <span className="file-icon"></span>
+                  {post.title}
                 </h3>
                 <time className="text-sm text-gray-600 dark:text-gray-400">
                   {new Date(post.date).toLocaleDateString("en-US", {
@@ -97,14 +114,7 @@ export default function Home() {
               </Link>
             ))}
           </div>
-        ) : (
-          <div className="bg-yellow-100 dark:bg-yellow-900 border-l-4 border-yellow-500 p-4 rounded">
-            <p className="text-yellow-700 dark:text-yellow-200">
-              No posts found. Add Markdown files to the 'posts' directory to get
-              started.
-            </p>
-          </div>
-        )}
+        </div>
       </div>
     </div>
   );
