@@ -18,12 +18,15 @@ export function Navigation() {
   const { theme, toggleTheme } = useTheme();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
+  // Get the base path for production
+  const basePath = process.env.NODE_ENV === "production" ? "/tacoz.me" : "";
+
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-white/80 dark:bg-gray-900/80 backdrop-blur-sm border-b border-gray-200 dark:border-gray-700">
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16">
           <div className="flex items-center">
-            <Link href="/" className="text-2xl font-bold">
+            <Link href={basePath + "/"} className="text-2xl font-bold">
               <span className="typing-effect">tacoz.me</span>
             </Link>
             <button
@@ -38,7 +41,7 @@ export function Navigation() {
             {navItems.map((item) => (
               <Link
                 key={item.href}
-                href={item.href}
+                href={basePath + item.href}
                 className={`text-sm link-underline ${
                   pathname === item.href
                     ? "text-blue-600 dark:text-blue-400 font-bold"
@@ -66,7 +69,7 @@ export function Navigation() {
             {navItems.map((item) => (
               <Link
                 key={item.href}
-                href={item.href}
+                href={basePath + item.href}
                 className={`block px-3 py-2 rounded-md text-base font-medium ${
                   pathname === item.href
                     ? "text-blue-600 dark:text-blue-400 bg-gray-100 dark:bg-gray-800"
