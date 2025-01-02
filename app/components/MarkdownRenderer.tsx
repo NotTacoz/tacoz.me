@@ -5,6 +5,7 @@ import ReactMarkdown from "react-markdown";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { tomorrow } from "react-syntax-highlighter/dist/esm/styles/prism";
 import Link from "next/link";
+import Image from "next/image";
 import styles from "./Callout.module.css";
 
 interface MarkdownRendererProps {
@@ -94,12 +95,12 @@ const MarkdownRenderer: React.FC<MarkdownRendererProps> = ({
   return (
     <ReactMarkdown
       components={{
-        img: ({ alt, src, ...props }) => {
+        img: ({ alt, src }) => {
           if (!src) return null;
 
           // Parse size from alt text (e.g., "100" in ![100](image.png))
           const size = alt ? parseInt(alt) : undefined;
-          const height = size && !isNaN(size) ? size : undefined;
+          const parsedHeight = size && !isNaN(size) ? size : 400;
 
           // Handle relative paths
           const imageSrc = src.startsWith("../")
@@ -108,15 +109,15 @@ const MarkdownRenderer: React.FC<MarkdownRendererProps> = ({
 
           return (
             <span className="flex justify-center items-center w-full">
-              <img
+              <Image
                 src={imageSrc}
-                alt={alt}
-                height={height}
-                style={
-                  height ? { height: `${height}px`, width: "auto" } : undefined
-                }
+                alt={alt || ""}
+                height={parsedHeight}
+                width={parsedHeight}
+                priority={false}
+                quality={75}
+                style={{ height: `${parsedHeight}px`, width: "auto" }}
                 className="rounded-lg"
-                {...props}
               />
             </span>
           );
@@ -138,7 +139,8 @@ const MarkdownRenderer: React.FC<MarkdownRendererProps> = ({
           const match = /language-(\w+)/.exec(className || "");
           return !inline && match ? (
             <SyntaxHighlighter
-              style={tomorrow as any}
+              // @ts-expect-error -- Type mismatch between tomorrow theme and component props
+              style={tomorrow}
               language={match[1]}
               PreTag="div"
               {...props}
