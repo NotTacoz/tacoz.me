@@ -13,11 +13,9 @@ const nextConfig = {
     },
     trailingSlash: true,
     assetPrefix: process.env.NODE_ENV === 'production' ? '/tacoz.me' : '',
-    outputFileTracingIncludes: {
-        '/posts/assets/**/*': true,
-    },
-    experimental: {
-    },
+    outputFileTracingIncludes: [
+     './posts/assets/**/*'
+    ],
 };
 
 module.exports = nextConfig;

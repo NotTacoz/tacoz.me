@@ -83,6 +83,7 @@ interface PageProps {
   params: Promise<{
     slug: string[];
   }>;
+  searchParams?: Promise<{ [key: string]: string | string[] | undefined }>;
 }
 
 export default async function Post({ params }: PageProps) {
@@ -109,7 +110,7 @@ export default async function Post({ params }: PageProps) {
       return (
         <div className="space-y-8">
           <h1 className="text-4xl font-bold mb-4">
-            {(await params).slug[(await params).slug.length - 1]}
+            {resolvedParams.slug[resolvedParams.slug.length - 1]}
           </h1>
           {description && (
             <div className="prose dark:prose-invert">

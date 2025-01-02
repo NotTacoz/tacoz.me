@@ -1,7 +1,6 @@
-// Start of Selection
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import ReactMarkdown from "react-markdown";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { tomorrow } from "react-syntax-highlighter/dist/esm/styles/prism";
@@ -19,51 +18,73 @@ const Blockquote: React.FC<{
   isNested: boolean;
 }> = ({ children, isNested }) => {
   const childrenArray = React.Children.toArray(children);
+  const [isExpanded, setIsExpanded] = useState<boolean>(true);
+
+  let defaultExpanded = true; // Default value
+  let isFoldable = false; // Default value
+
   if (
-    !childrenArray[0] ||
-    typeof childrenArray[0] !== "object" ||
-    !("props" in childrenArray[0])
+    childrenArray[0] &&
+    typeof childrenArray[0] === "object" &&
+    "props" in childrenArray[0]
   ) {
-    return <blockquote>{children}</blockquote>;
+    const textContent = childrenArray[0].props.children?.[0] || "";
+    const match = String(textContent).match(/^\[!(\w+)\]([-+])?(?:\s+(.+))?/);
+
+    if (match && !isNested) {
+      const [, , foldState] = match;
+      isFoldable = foldState === "+" || foldState === "-";
+      defaultExpanded = foldState !== "-";
+    }
   }
 
-  const textContent = childrenArray[0].props.children?.[0] || "";
-  const match = String(textContent).match(/^\[!(\w+)\]([-+])?(?:\s+(.+))?/);
+  useEffect(() => {
+    setIsExpanded(defaultExpanded);
+  }, [defaultExpanded]);
 
-  if (match && !isNested) {
-    const [, type, foldState, title] = match;
-    const lines = String(textContent).split("\n");
-    const cleanedContent = lines.slice(1).join("\n");
-    const calloutType = type.toLowerCase();
-    const isFoldable = foldState === "+" || foldState === "-";
-    const defaultExpanded = foldState !== "-";
-    const [isExpanded, setIsExpanded] = useState(defaultExpanded);
+  if (
+    childrenArray[0] &&
+    typeof childrenArray[0] === "object" &&
+    "props" in childrenArray[0]
+  ) {
+    const textContent = childrenArray[0].props.children?.[0] || "";
+    const match = String(textContent).match(/^\[!(\w+)\]([-+])?(?:\s+(.+))?/);
 
-    const displayTitle = title || type.charAt(0).toUpperCase() + type.slice(1);
+    if (match && !isNested) {
+      const [, type, , title] = match;
+      const cleanedContent = String(textContent)
+        .split("\n")
+        .slice(1)
+        .join("\n");
+      const calloutType = type.toLowerCase();
+      const displayTitle =
+        title || type.charAt(0).toUpperCase() + type.slice(1);
 
-    return (
-      <div
-        className={`${styles.callout} ${styles[`callout-${calloutType}`]} ${
-          isFoldable ? styles.foldable : ""
-        } ${isExpanded ? styles.expanded : ""}`}
-      >
+      return (
         <div
-          className={styles["callout-title"]}
-          onClick={() => isFoldable && setIsExpanded(!isExpanded)}
+          className={`${styles.callout} ${styles[`callout-${calloutType}`]} ${
+            isFoldable ? styles.foldable : ""
+          } ${isExpanded ? styles.expanded : ""}`}
         >
-          <strong>{displayTitle}</strong>
-          {isFoldable && (
-            <span className={styles["fold-indicator"]}>
-              {isExpanded ? "−" : "+"}
-            </span>
-          )}
+          <div
+            className={styles["callout-title"]}
+            onClick={() => isFoldable && setIsExpanded(!isExpanded)}
+          >
+            <strong>{displayTitle}</strong>
+            {isFoldable && (
+              <span className={styles["fold-indicator"]}>
+                {isExpanded ? "−" : "+"}
+              </span>
+            )}
+          </div>
+          <div className={styles["callout-content"]}>
+            <MarkdownRenderer content={cleanedContent} isNested={true} />
+          </div>
         </div>
-        <div className={styles["callout-content"]}>
-          <MarkdownRenderer content={cleanedContent} isNested={true} />
-        </div>
-      </div>
-    );
+      );
+    }
   }
+
   return <blockquote>{children}</blockquote>;
 };
 
@@ -154,7 +175,7 @@ const MarkdownRenderer: React.FC<MarkdownRendererProps> = ({
       );
     },
     blockquote: ({ children }: { children: React.ReactNode }) => (
-      <Blockquote children={children} isNested={isNested} />
+      <Blockquote isNested={isNested}>{children}</Blockquote>
     ),
   };
 

@@ -145,6 +145,7 @@
   },
   "active": "92f02a96f749b49a",
   "lastOpenFiles": [
+    "node_modules/@img/sharp-libvips-linux-arm64",
     "public/favicon.ico",
     "public/favicon.ico.crdownload",
     "src/app/components/MarkdownRenderer.tsx",
@@ -157,7 +158,6 @@
     "node_modules/es-abstract/package.json",
     "node_modules/@typescript-eslint/eslint-plugin/rules.d.ts",
     "node_modules/@typescript-eslint/eslint-plugin/index.d.ts",
-    "node_modules/es-abstract/index.js",
     "node_modules/eslint/README.md",
     "node_modules/@typescript-eslint/eslint-plugin/README.md",
     "node_modules/@typescript-eslint/eslint-plugin/docs/rules/camelcase.md",

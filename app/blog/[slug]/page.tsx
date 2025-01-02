@@ -1,4 +1,3 @@
-// Start of Selection
 import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
@@ -6,7 +5,9 @@ import MarkdownRenderer from "../../components/MarkdownRenderer";
 import { notFound } from "next/navigation";
 
 interface PageProps {
-  params: { slug: string };
+  params: {
+    slug: string[];
+  };
 }
 
 export async function generateStaticParams() {
@@ -20,20 +21,18 @@ export async function generateStaticParams() {
     .filter((fileName) => fileName.endsWith(".md"))
     .map((fileName) => fileName.replace(/\.md$/, ""));
 
-  // Add 'favicon.ico' to handle the missing param error
-  slugs.push("favicon.ico");
-
   return slugs.map((slug) => ({
-    slug,
+    slug: slug.split("/"),
   }));
 }
 
-export default function BlogPost({ params }: PageProps) {
-  if (params.slug === "favicon.ico") {
+export default async function Post({ params }: PageProps) {
+  const slug = params.slug.join("/");
+  if (slug === "favicon.ico") {
     notFound();
   }
 
-  const fullPath = path.join(process.cwd(), "posts", `${params.slug}.md`);
+  const fullPath = path.join(process.cwd(), "posts", `${slug}.md`);
 
   if (!fs.existsSync(fullPath)) {
     notFound();
