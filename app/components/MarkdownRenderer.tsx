@@ -17,23 +17,6 @@ const MarkdownRenderer: React.FC<MarkdownRendererProps> = ({
   content,
   isNested = false,
 }) => {
-  // Process Obsidian-style image syntax and ensure proper asset path handling
-  const processedContent = content
-    // Handle ![[image.png]] syntax
-    .replace(/!\[\[(.*?)\]\]/g, (match, p1) => {
-      const [fileName, alt] = p1.split("|");
-      const cleanFileName = fileName.trim().replace(/^assets\//, "");
-      return `![${alt || cleanFileName}](/posts/assets/${cleanFileName})`;
-    })
-    // Handle standard ![alt](path) syntax
-    .replace(/!\[(.*?)\]\((.*?)\)/g, (match, alt, path) => {
-      if (path.includes("assets/")) {
-        const cleanPath = path.replace(/^assets\//, "");
-        return `![${alt}](/posts/assets/${cleanPath})`;
-      }
-      return match;
-    });
-
   const components = {
     code: ({
       inline,
@@ -54,32 +37,30 @@ const MarkdownRenderer: React.FC<MarkdownRendererProps> = ({
       );
     },
     img: ({ src, alt }: { src?: string; alt?: string }) => {
-      if (src?.startsWith("/posts/assets/")) {
-        return (
-          <span className={styles.imageWrapper}>
-            <Image
-              src={src}
-              alt={alt || ""}
-              width={800}
-              height={600}
-              className={styles.image}
-              priority
-            />
-          </span>
-        );
-      }
-      return <img src={src} alt={alt || ""} />;
+      if (!src) return null;
+      const normalizedSrc = src.startsWith("assets/") ? `/${src}` : src;
+      return (
+        <span className={styles.imageWrapper}>
+          <Image
+            src={normalizedSrc}
+            alt={alt || ""}
+            width={800}
+            height={600}
+            className={styles.image}
+            priority
+          />
+        </span>
+      );
     },
     text: ({ children }: { children: React.ReactNode }) => {
       if (typeof children !== "string") return <>{children}</>;
 
-      // Process wikilinks [[Page Name]]
       const parts = children.split(/\[\[([^\]]+)\]\]/g);
+
       return (
         <>
           {parts.map((part, index) => {
             if (index % 2 === 1) {
-              // This is a wikilink
               const [link, alias] = part.split("|").map((s) => s.trim());
               const displayText = alias || link;
               const href = link
@@ -110,7 +91,6 @@ const MarkdownRenderer: React.FC<MarkdownRendererProps> = ({
         );
       }
 
-      // Handle internal links
       const cleanHref = href.replace(/\.md$/, "").replace(/^\//, "");
 
       return (
@@ -121,16 +101,15 @@ const MarkdownRenderer: React.FC<MarkdownRendererProps> = ({
     },
     blockquote: ({ children }: { children: React.ReactNode }) => {
       const childrenArray = React.Children.toArray(children);
-      if (!childrenArray[0]) {
+      if (
+        !childrenArray[0] ||
+        typeof childrenArray[0] !== "object" ||
+        !("props" in childrenArray[0])
+      ) {
         return <blockquote>{children}</blockquote>;
       }
 
-      const firstChild = childrenArray[0];
-      if (typeof firstChild !== "object" || !("props" in firstChild)) {
-        return <blockquote>{children}</blockquote>;
-      }
-
-      const textContent = firstChild.props.children?.[0] || "";
+      const textContent = childrenArray[0].props.children?.[0] || "";
       const match = String(textContent).match(/^\[!(\w+)\]([-+])?(?:\s+(.+))?/);
 
       if (match && !isNested) {
@@ -172,9 +151,7 @@ const MarkdownRenderer: React.FC<MarkdownRendererProps> = ({
     },
   };
 
-  return (
-    <ReactMarkdown components={components}>{processedContent}</ReactMarkdown>
-  );
+  return <ReactMarkdown components={components}>{content}</ReactMarkdown>;
 };
 
 export default MarkdownRenderer;

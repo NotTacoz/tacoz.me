@@ -59,9 +59,18 @@ function getPostsData(dir: string, baseSlug: string = ""): PostData[] {
 
 export async function generateStaticParams() {
   const posts = getPostsData("posts");
-  return posts.map((post) => ({
-    slug: post.slug.split(path.sep),
-  }));
+  const additionalPaths = [
+    { slug: ["templates", "learning"] },
+    { slug: ["learning"] },
+    { slug: ["notes"] },
+    { slug: ["references"] },
+  ];
+  return [
+    ...posts.map((post) => ({
+      slug: post.slug.split(path.sep),
+    })),
+    ...additionalPaths,
+  ];
 }
 
 function estimateReadingTime(content: string): number {
@@ -70,12 +79,15 @@ function estimateReadingTime(content: string): number {
   return Math.ceil(wordCount / wordsPerMinute);
 }
 
-export default function Post({ params }: { params: { slug?: string[] } }) {
-  if (!params.slug) {
-    notFound();
-  }
+interface PageProps {
+  params: {
+    slug: string[];
+  };
+}
 
-  const slug = params.slug.join("/");
+export default async function Post({ params }: PageProps) {
+  const slugParams = await Promise.resolve(params.slug);
+  const slug = slugParams.join("/");
   const fullPath = path.join(process.cwd(), "posts", slug);
 
   if (fs.existsSync(fullPath) || fs.existsSync(`${fullPath}.md`)) {

@@ -1,20 +1,25 @@
 {
   "main": {
-    "id": "b59654de3cf8f6f0",
+    "id": "daa9cf40237b5893",
     "type": "split",
     "children": [
       {
-        "id": "c71c095e1105fc5c",
+        "id": "0d4493e54cd5dccd",
         "type": "tabs",
         "children": [
           {
-            "id": "fc4419acf5c9bde1",
+            "id": "92f02a96f749b49a",
             "type": "leaf",
             "state": {
-              "type": "empty",
-              "state": {},
+              "type": "markdown",
+              "state": {
+                "file": "posts/hello-world.md",
+                "mode": "source",
+                "backlinks": false,
+                "source": false
+              },
               "icon": "lucide-file",
-              "title": "New tab"
+              "title": "hello-world"
             }
           }
         ]
@@ -23,15 +28,15 @@
     "direction": "vertical"
   },
   "left": {
-    "id": "5001a9ed355dbe03",
+    "id": "505ba553e40a1c7f",
     "type": "split",
     "children": [
       {
-        "id": "b42b378b0db1544d",
+        "id": "ba8b1a41e944b163",
         "type": "tabs",
         "children": [
           {
-            "id": "a81f537f5d782695",
+            "id": "496f4d78b54d2e69",
             "type": "leaf",
             "state": {
               "type": "file-explorer",
@@ -43,7 +48,7 @@
             }
           },
           {
-            "id": "5b41bbf593ff3a0f",
+            "id": "6da5b8cc431fec8f",
             "type": "leaf",
             "state": {
               "type": "search",
@@ -60,7 +65,7 @@
             }
           },
           {
-            "id": "e9d65457e3ab197a",
+            "id": "6cf30e9df0bd460a",
             "type": "leaf",
             "state": {
               "type": "bookmarks",
@@ -76,33 +81,15 @@
     "width": 300
   },
   "right": {
-    "id": "4dadcdb4d6c523e4",
+    "id": "cf3c43442eb7742d",
     "type": "split",
     "children": [
       {
-        "id": "e5c33ffb3dc4f069",
+        "id": "1e8590252b8ca3a5",
         "type": "tabs",
         "children": [
           {
-            "id": "e0ccecdff7f627a6",
-            "type": "leaf",
-            "state": {
-              "type": "backlink",
-              "state": {
-                "collapseAll": false,
-                "extraContext": false,
-                "sortOrder": "alphabetical",
-                "showSearch": false,
-                "searchQuery": "",
-                "backlinkCollapsed": false,
-                "unlinkedCollapsed": true
-              },
-              "icon": "links-coming-in",
-              "title": "Backlinks"
-            }
-          },
-          {
-            "id": "40115a67af541de4",
+            "id": "9676302584d6447f",
             "type": "leaf",
             "state": {
               "type": "outgoing-link",
@@ -115,7 +102,7 @@
             }
           },
           {
-            "id": "cc392f63f4509daf",
+            "id": "0b2a1e9eb666892d",
             "type": "leaf",
             "state": {
               "type": "tag",
@@ -128,7 +115,7 @@
             }
           },
           {
-            "id": "b6f247e13509d06d",
+            "id": "f6a7d2e725eace91",
             "type": "leaf",
             "state": {
               "type": "outline",
@@ -148,49 +135,36 @@
     "hiddenItems": {
       "switcher:Open quick switcher": false,
       "graph:Open graph view": false,
-      "canvas:Create new canvas": false,
-      "daily-notes:Open today's daily note": false,
       "templates:Insert template": false,
-      "command-palette:Open command palette": false
+      "command-palette:Open command palette": false,
+      "table-editor-obsidian:Advanced Tables Toolbar": false,
+      "obsidian-excalidraw-plugin:Create new drawing": false,
+      "obsidian-git:Open Git source control": false,
+      "templater-obsidian:Templater": false
     }
   },
-  "active": "fc4419acf5c9bde1",
+  "active": "92f02a96f749b49a",
   "lastOpenFiles": [
-    "posts/hello-world.md",
-    "out/_next/static/chunks/app/blog/[slug]/page-f849569e347310ce.js",
-    "out/_next/static/chunks/app/layout-a42a1f44ee806162.js",
-    "out/_next/static/css/2cc4bb34c50c387b.css",
-    "out/_next/static/chunks/main-e89c02ebbfa11c39.js",
-    "out/_next/static/chunks/webpack-ed5590580e9f1301.js",
-    "out/_next/static/chunks/488-112cad83b638bcd2.js",
-    "out/_next/static/chunks/920-38aed77e7070d555.js",
-    "out/_next/static/I6e69OWmLWrbPH04aZqCV/_buildManifest.js",
-    "out/_next/static/I6e69OWmLWrbPH04aZqCV/_ssgManifest.js",
-    "out/_next/static/I6e69OWmLWrbPH04aZqCV",
-    "node_modules/next/license.md",
-    "node_modules/inline-style-parser/CHANGELOG.md",
-    "node_modules/string-width-cjs/node_modules/strip-ansi/readme.md",
-    "node_modules/wrap-ansi-cjs/node_modules/ansi-styles/readme.md",
-    "node_modules/wrap-ansi-cjs/node_modules/ansi-regex/readme.md",
-    "node_modules/wrap-ansi-cjs/node_modules/strip-ansi/readme.md",
-    "node_modules/strip-ansi-cjs/node_modules/ansi-regex/readme.md",
-    "node_modules/decode-named-character-reference/node_modules/character-entities/readme.md",
-    "node_modules/postcss-load-config/node_modules/lilconfig/readme.md",
-    "node_modules/postcss-nested/node_modules/postcss-selector-parser/README.md",
-    "node_modules/postcss-nested/node_modules/postcss-selector-parser/CHANGELOG.md",
-    "node_modules/postcss-nested/node_modules/postcss-selector-parser/API.md",
-    "node_modules/prop-types/node_modules/react-is/README.md",
-    "node_modules/tailwindcss/node_modules/postcss-selector-parser/README.md",
-    "node_modules/tailwindcss/node_modules/postcss-selector-parser/CHANGELOG.md",
-    "node_modules/tailwindcss/node_modules/postcss-selector-parser/API.md",
-    "node_modules/string-width-cjs/node_modules/ansi-regex/readme.md",
-    "node_modules/glob-to-regexp/README.md",
-    "node_modules/mri/license.md",
-    "node_modules/mri/readme.md",
-    "node_modules/sade/readme.md",
-    "node_modules/diff/release-notes.md",
-    "node_modules/diff/README.md",
-    "node_modules/diff/CONTRIBUTING.md",
-    "node_modules/kleur/readme.md"
+    "posts/templates/blog.md",
+    "posts/page.md",
+    "hello-world.md",
+    "templates/general.md",
+    "templates/learning.md",
+    "page.md",
+    "templates/blog.md",
+    "assets/GgDBKAZX0AAi8C5.jpeg",
+    "templates/references.md",
+    "assets",
+    "learning/index.md",
+    "blog",
+    "blog/fasfsa.md",
+    "templates/fa.md",
+    "templates/notes.md",
+    "templates/notes 1.md",
+    "references",
+    "notes",
+    "blog",
+    "learning",
+    "templates"
   ]
 }

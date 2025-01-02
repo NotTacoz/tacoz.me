@@ -6,15 +6,11 @@ tags:
 ---
 This is my first blog post! Welcome to my digital garden where I share my thoughts and learnings.
 ## navigation
-
-time to start [[learning/index|index]]
 [learning](templates/learning.md) (non wiki link)
-
-[[page]]
+this is [page](page.md)
 ## images
-![](assets/GgDBKAZX0AAi8C5.jpeg)
+![](../assets/GgDBKAZX0AAi8C5.jpeg)
 
-![[assets/GgDBKAZX0AAi8C5.jpeg]]
 
   
 
