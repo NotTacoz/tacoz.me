@@ -111,12 +111,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "learning/index.md",
-                "mode": "source",
+                "file": "hello-world.md",
+                "mode": "preview",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "index"
+              "title": "hello-world"
             }
           }
         ],
@@ -243,10 +243,12 @@
       "templater-obsidian:Templater": false
     }
   },
-  "active": "496f4d78b54d2e69",
+  "active": "38a390dae5c3332c",
   "lastOpenFiles": [
-    "templates/learning.md",
+    "assets/GgDBKAZX0AAi8C5.jpeg",
+    "assets",
     "learning/index.md",
+    "templates/learning.md",
     "blog",
     "blog/fasfsa.md",
     "templates/fa.md",

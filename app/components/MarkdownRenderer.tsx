@@ -4,6 +4,7 @@ import React from "react";
 import ReactMarkdown from "react-markdown";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { tomorrow } from "react-syntax-highlighter/dist/esm/styles/prism";
+import WikilinksRenderer from "./WikilinksRenderer";
 
 interface MarkdownRendererProps {
   content: string;
@@ -30,6 +31,9 @@ const MarkdownRenderer: React.FC<MarkdownRendererProps> = ({ content }) => {
             </code>
           );
         },
+        p: ({ node, children, ...props }) => (
+          <WikilinksRenderer content={String(children)} {...props} />
+        ),
       }}
     >
       {content}

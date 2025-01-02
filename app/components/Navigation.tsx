@@ -30,7 +30,7 @@ export function Navigation() {
               <Link
                 key={item.href}
                 href={item.href}
-                className={`text-sm ${
+                className={`text-sm link-underline ${
                   pathname === item.href
                     ? "text-blue-600 dark:text-blue-400 font-bold"
                     : "text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white"

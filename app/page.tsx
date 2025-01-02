@@ -2,6 +2,7 @@ import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
 import Link from "next/link";
+import { Folder, FileText } from "lucide-react";
 
 interface PostData {
   slug: string;
@@ -83,7 +84,7 @@ export default function Home() {
                 className="block p-4 bg-gray-100 dark:bg-gray-800 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors duration-200"
               >
                 <h3 className="text-xl font-semibold mb-2">
-                  <span className="folder-icon"></span>
+                  <Folder className="icon text-yellow-400" />
                   {folder.title}
                 </h3>
               </Link>
@@ -101,7 +102,7 @@ export default function Home() {
                 className="block p-4 bg-gray-100 dark:bg-gray-800 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors duration-200"
               >
                 <h3 className="text-xl font-semibold mb-2">
-                  <span className="file-icon"></span>
+                  <FileText className="icon text-blue-400" />
                   {post.title}
                 </h3>
                 <time className="text-sm text-gray-600 dark:text-gray-400">

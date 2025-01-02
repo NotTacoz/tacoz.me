@@ -2,7 +2,8 @@ import "./globals.css";
 import { Space_Mono } from "next/font/google";
 import { Navigation } from "./components/Navigation";
 import { ThemeProvider } from "./providers";
-
+import ReadingProgress from "./components/ReadingProgress";
+import BackToTop from "./components/BacktoTop";
 const spaceMono = Space_Mono({
   weight: ["400", "700"],
   subsets: ["latin"],
@@ -31,11 +32,14 @@ export default function RootLayout({
             </main>
             <footer className="text-center py-4 text-sm">
               <p>
-                &copy; {new Date().getFullYear()} tacoz.me. All rights reserved.
+                &copy; {new Date().getFullYear()} tacoz 2025. All rights
+                reserved.
               </p>
             </footer>
           </div>
         </ThemeProvider>
+        <BackToTop />
+        <ReadingProgress />
       </body>
     </html>
   );
