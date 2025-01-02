@@ -26,15 +26,14 @@ function getPostsData(dir: string, baseSlug: string = ""): PostData[] {
     for (const item of items) {
       const fullPath = path.join(postsDirectory, item);
       const isDirectory = fs.lstatSync(fullPath).isDirectory();
-      const slug = path.join(
-        baseSlug,
-        isDirectory ? `${item}/` : item.replace(/\.md$/, "")
-      );
+      const slug = path
+        .join(baseSlug, isDirectory ? `${item}/` : item.replace(/\.md$/, ""))
+        .replace(/\\/g, "/");
 
       if (isDirectory) {
         if (!ignoredFolders.includes(item)) {
           posts.push({
-            slug: encodeURIComponent(slug),
+            slug: encodeURI(slug),
             title: item,
             date: new Date().toISOString(),
             isFolder: true,
@@ -45,7 +44,7 @@ function getPostsData(dir: string, baseSlug: string = ""): PostData[] {
         const fileContents = fs.readFileSync(fullPath, "utf8");
         const { data } = matter(fileContents);
         posts.push({
-          slug: encodeURIComponent(slug),
+          slug: encodeURI(slug),
           title: data.title || item.replace(/\.md$/, ""),
           date: data.date || new Date().toISOString(),
           isFolder: false,
@@ -62,38 +61,70 @@ export async function generateStaticParams() {
 
   // Get all possible paths by splitting each slug
   const allPaths = posts.reduce((paths: { slug: string[] }[], post) => {
-    const segments = decodeURIComponent(post.slug)
-      .split(path.sep)
-      .filter(Boolean);
+    // First decode the URI to handle spaces correctly
+    const decodedSlug = decodeURI(post.slug);
+
+    // Split by forward slash and filter out empty segments
+    const segments = decodedSlug
+      .split("/")
+      .filter(Boolean)
+      .map((segment) => {
+        // Ensure each segment is properly encoded for URL paths
+        return encodeURIComponent(segment);
+      });
 
     // Add the full path
     paths.push({ slug: segments });
 
     // Add all parent paths
-    for (let i = 1; i < segments.length; i++) {
-      const parentPath = segments.slice(0, i);
-      // Only add if not already included
-      if (!paths.some((p) => p.slug.join("/") === parentPath.join("/"))) {
-        paths.push({ slug: parentPath });
+    let currentPath: string[] = [];
+    segments.forEach((segment) => {
+      currentPath = [...currentPath, segment];
+      if (!paths.some((p) => p.slug.join("/") === currentPath.join("/"))) {
+        paths.push({ slug: [...currentPath] });
       }
-    }
+    });
 
     return paths;
   }, []);
 
-  // Add any additional static paths with proper encoding
-  const additionalPaths = [
-    { slug: ["templates"] },
-    { slug: ["templates", "learning"] },
-    { slug: ["learning"] },
-    { slug: ["notes"] },
-    { slug: ["notes", "Books"] },
-    { slug: ["references"] },
-    { slug: ["references", "Math References"] },
-  ];
+  // Get all files and directories recursively
+  function getAllPaths(
+    dir: string,
+    basePath: string[] = []
+  ): { slug: string[] }[] {
+    const items = fs.readdirSync(dir);
+    let paths: { slug: string[] }[] = [];
 
-  // Combine and deduplicate paths
-  const combinedPaths = [...allPaths, ...additionalPaths];
+    for (const item of items) {
+      if (ignoredFolders.includes(item)) continue;
+
+      const fullPath = path.join(dir, item);
+      const isDirectory = fs.lstatSync(fullPath).isDirectory();
+      const itemName = item.replace(/\.md$/, "");
+      const itemPath = [...basePath, encodeURIComponent(itemName)];
+
+      if (isDirectory) {
+        paths.push({ slug: itemPath });
+        paths = paths.concat(getAllPaths(fullPath, itemPath));
+      } else if (item.endsWith(".md") && item !== "index.md") {
+        // Add the path without /page
+        paths.push({ slug: itemPath });
+
+        // Also add the path with /page for compatibility
+        paths.push({ slug: [...itemPath, "page"] });
+      }
+    }
+
+    return paths;
+  }
+
+  // Get all possible paths from the posts directory
+  const postsDir = path.join(process.cwd(), "posts");
+  const fileSystemPaths = getAllPaths(postsDir);
+
+  // Combine all paths and remove duplicates
+  const combinedPaths = [...allPaths, ...fileSystemPaths];
   const uniquePaths = combinedPaths.filter(
     (path, index, self) =>
       index === self.findIndex((p) => p.slug.join("/") === path.slug.join("/"))
@@ -113,6 +144,18 @@ interface PageProps {
     slug: string[];
   };
   searchParams?: { [key: string]: string | string[] | undefined };
+}
+
+// Add this function to handle internal links
+function processInternalLink(content: string): string {
+  return content.replace(
+    /\[([^\]]+)\]\(([^)]+)\.md\)/g,
+    (match, text, link) => {
+      // Remove .md extension and ensure the link doesn't end with /page
+      const cleanLink = link.replace(/\.md$/, "").replace(/\/page$/, "");
+      return `[${text}](/${cleanLink})`;
+    }
+  );
 }
 
 export default async function Post({ params }: PageProps) {
@@ -196,6 +239,7 @@ export default async function Post({ params }: PageProps) {
       const fileContents = fs.readFileSync(filePath, "utf8");
       const { data, content } = matter(fileContents);
       const readingTime = estimateReadingTime(content);
+      const processedContent = processInternalLink(content);
 
       return (
         <article className="prose dark:prose-invert lg:prose-xl mx-auto">
@@ -213,7 +257,7 @@ export default async function Post({ params }: PageProps) {
             <span className="mx-2">•</span>
             <span>{readingTime} min read</span>
           </div>
-          <MarkdownRenderer content={content} />
+          <MarkdownRenderer content={processedContent} />
           <TableOfContents />
         </article>
       );

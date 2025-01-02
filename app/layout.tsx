@@ -28,6 +28,18 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning className={spaceMono.variable}>
+      <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function() {
+                const theme = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+                document.documentElement.classList.toggle('dark', theme === 'dark');
+              })()
+            `,
+          }}
+        />
+      </head>
       <body className="bg-white dark:bg-gray-900 text-gray-900 dark:text-white transition-colors duration-200 font-mono">
         <ThemeProvider>
           <div className="min-h-screen flex flex-col">

@@ -13,13 +13,13 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "posts/learning/index.md",
+                "file": "posts/hello-world.md",
                 "mode": "source",
                 "backlinks": false,
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "index"
+              "title": "hello-world"
             }
           },
           {
@@ -160,9 +160,9 @@
   },
   "active": "92f02a96f749b49a",
   "lastOpenFiles": [
+    "posts/learning/index.md",
     "posts/notes/index.md",
     "posts/learning/Weekly Reflections.md",
-    "posts/learning/index.md",
     "posts/hello-world.md",
     "posts/page.md",
     "posts/blog/index.md",
