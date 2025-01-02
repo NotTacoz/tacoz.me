@@ -19,7 +19,9 @@ const MarkdownRenderer: React.FC<MarkdownRendererProps> = ({
   // Process Obsidian-style image syntax
   const processedContent = content.replace(/!\[\[(.*?)\]\]/g, (match, p1) => {
     const [fileName, alt] = p1.split("|");
-    return `![${alt || fileName}](/assets/${fileName})`;
+    // Remove 'assets/' if it's already in the path
+    const cleanFileName = fileName.trim().replace(/^assets\//, "");
+    return `![${alt || cleanFileName}](/assets/${cleanFileName})`;
   });
 
   const components = {
@@ -41,31 +43,26 @@ const MarkdownRenderer: React.FC<MarkdownRendererProps> = ({
         <code className={className}>{children}</code>
       );
     },
-    p: (props: any) => <p {...props} />,
     img: ({ src, alt }: { src?: string; alt?: string }) => {
       if (src?.startsWith("/assets/")) {
+        // Wrap in span instead of div to avoid hydration issues
         return (
-          <div className={styles.imageWrapper}>
+          <span className={styles.imageWrapper}>
             <Image
               src={src}
               alt={alt || ""}
-              width={600}
-              height={400}
+              width={800}
+              height={600}
               className={styles.image}
+              priority
             />
-          </div>
+          </span>
         );
       }
       return <img src={src} alt={alt || ""} />;
     },
     a: ({ href, children }: { href?: string; children: React.ReactNode }) => {
-      if (href?.startsWith("/notes/")) {
-        return (
-          <a href={href} className={styles.wikilink}>
-            {children}
-          </a>
-        );
-      }
+      // Handle wikilinks
       return (
         <a href={href} target="_blank" rel="noopener noreferrer">
           {children}
@@ -73,7 +70,6 @@ const MarkdownRenderer: React.FC<MarkdownRendererProps> = ({
       );
     },
     blockquote: ({ children }: { children: React.ReactNode }) => {
-      const [isExpanded, setIsExpanded] = useState(true);
       const textContent = React.Children.toArray(children)
         .map((child) => (typeof child === "string" ? child : ""))
         .join("");
@@ -81,16 +77,20 @@ const MarkdownRenderer: React.FC<MarkdownRendererProps> = ({
       const match = textContent.match(/^\[!(\w+)\]([-+])?(?:\s+(.+))?/);
       if (match && !isNested) {
         const [, type, foldState, title] = match;
-        const cleanedContent = textContent
-          .replace(/^\[!\w+\][-+]?\s*.*\n?/, "")
-          .trim();
+        // Remove only the first line that contains the callout syntax
+        const lines = textContent.split("\n");
+        const cleanedContent = lines.slice(1).join("\n").trim();
         const calloutType = type.toLowerCase();
         const isFoldable = foldState === "+" || foldState === "-";
         const defaultExpanded = foldState !== "-";
 
+        // Calculate initial expanded state
+        const initialExpanded = defaultExpanded;
+        const [isExpanded, setIsExpanded] = useState(initialExpanded);
+
         React.useEffect(() => {
-          setIsExpanded(defaultExpanded);
-        }, [defaultExpanded]);
+          setIsExpanded(initialExpanded);
+        }, [initialExpanded]);
 
         const displayTitle =
           title || type.charAt(0).toUpperCase() + type.slice(1);
@@ -122,23 +122,21 @@ const MarkdownRenderer: React.FC<MarkdownRendererProps> = ({
     },
     text: ({ children }: { children: React.ReactNode }) => {
       if (typeof children !== "string") return <>{children}</>;
-      const parts = children.split(/\[\[([^\]|]+)(?:\|([^\]]+))?\]\]/g);
+
+      // Process wikilinks
+      const parts = children.split(/\[\[([^\]]+)\]\]/g);
       return (
         <>
           {parts.map((part, index) => {
-            if (index % 3 === 1) {
-              const displayText = parts[index + 1] || part;
+            if (index % 2 === 1) {
+              const [link, alias] = part.split("|").map((s) => s.trim());
+              const displayText = alias || link;
+
               return (
-                <a
-                  key={index}
-                  href={`/notes/${part.trim()}`}
-                  className={styles.wikilink}
-                >
+                <a key={index} href={`/${link}`} className={styles.wikilink}>
                   {displayText}
                 </a>
               );
-            } else if (index % 3 === 2) {
-              return null;
             }
             return part;
           })}

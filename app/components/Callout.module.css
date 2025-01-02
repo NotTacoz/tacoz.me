@@ -19,23 +19,26 @@
 .fold-indicator {
   font-size: 1.2rem;
   opacity: 0.7;
+  margin-left: 0.5rem;
+  user-select: none;
 }
 
 .callout.foldable .callout-content {
-  transition: max-height 0.2s ease-out, opacity 0.2s ease-out;
+  transition: max-height 0.3s ease-out, opacity 0.2s ease-out,
+    margin 0.2s ease-out;
   overflow: hidden;
   opacity: 1;
+  margin: 1rem 0 0 0;
 }
 
 .callout:not(.expanded) .callout-content {
   max-height: 0;
   margin: 0;
-  padding: 0;
   opacity: 0;
 }
 
 .callout.expanded .callout-content {
-  max-height: 1000px;
+  max-height: none;
   opacity: 1;
 }
 
@@ -45,6 +48,7 @@
   text-decoration: none;
   border-bottom: 1px solid transparent;
   transition: border-color 0.2s ease;
+  padding-bottom: 1px;
 }
 
 .wikilink:hover {
@@ -53,17 +57,18 @@
 
 /* Images */
 .imageWrapper {
-  margin: 1rem 0;
-  border-radius: 0.5rem;
-  overflow: hidden;
-  max-width: 100%;
+  display: block;
+  margin: 1.5rem 0;
+  position: relative;
+  width: 100%;
 }
 
 .image {
-  width: 100%;
-  height: auto;
+  border-radius: 0.5rem;
+  max-width: 100%;
+  height: auto !important;
   display: block;
-  object-fit: contain;
+  margin: 0 auto;
 }
 
 /* Callout types */
