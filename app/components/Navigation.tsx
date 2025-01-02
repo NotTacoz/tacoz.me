@@ -23,16 +23,16 @@ export function Navigation() {
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16">
           <div className="flex items-center">
-            <Link href="/" className="text-2xl font-bold flex items-center">
-              <span className="typing-effect mr-2">tacoz.me</span>
-              <button
-                onClick={toggleTheme}
-                className="p-2 text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-transform duration-300 ease-in-out transform hover:rotate-180"
-                aria-label="Toggle theme"
-              >
-                {theme === "light" ? <Moon size={20} /> : <Sun size={20} />}
-              </button>
+            <Link href="/" className="text-2xl font-bold">
+              <span className="typing-effect">tacoz.me</span>
             </Link>
+            <button
+              onClick={toggleTheme}
+              className="p-2 ml-2 text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-transform duration-300 ease-in-out transform hover:rotate-180"
+              aria-label="Toggle theme"
+            >
+              {theme === "light" ? <Moon size={20} /> : <Sun size={20} />}
+            </button>
           </div>
           <div className="hidden md:flex items-center space-x-8">
             {navItems.map((item) => (

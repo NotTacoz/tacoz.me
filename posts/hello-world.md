@@ -10,7 +10,7 @@ This is my first blog post! Welcome to my digital garden where I share my though
 time to start [[templates/learning|learning]]
 [learning](templates/learning.md) (non wiki link)
 ## images
-![](assets/GgDBKAZX0AAi8C5.jpeg)
+	![](assets/GgDBKAZX0AAi8C5.jpeg)
 
 ![[assets/GgDBKAZX0AAi8C5.jpeg]]
 
