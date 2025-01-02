@@ -112,7 +112,7 @@
               "type": "markdown",
               "state": {
                 "file": "hello-world.md",
-                "mode": "preview",
+                "mode": "source",
                 "backlinks": false,
                 "source": false
               },

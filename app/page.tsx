@@ -101,8 +101,8 @@ export default function Home() {
                 href={`/${post.slug}`}
                 className="block p-4 bg-gray-100 dark:bg-gray-800 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors duration-200"
               >
-                <h3 className="text-xl font-semibold mb-2">
-                  <FileText className="icon text-blue-400" />
+                <h3 className="text-xl font-semibold mb-2 flex items-center">
+                  <FileText className="icon text-blue-400 mr-2" />
                   {post.title}
                 </h3>
                 <time className="text-sm text-gray-600 dark:text-gray-400">

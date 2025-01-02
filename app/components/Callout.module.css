@@ -1,0 +1,123 @@
+.callout {
+  border-radius: 0.5rem;
+  padding: 1rem;
+  margin: 1rem 0;
+  border-left: 4px solid;
+  background-color: var(--callout-bg);
+  border-color: var(--callout-border);
+}
+
+.callout-title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.fold-indicator {
+  font-size: 1.2rem;
+  opacity: 0.7;
+}
+
+.callout.foldable .callout-content {
+  transition: max-height 0.2s ease-out, opacity 0.2s ease-out;
+  overflow: hidden;
+  opacity: 1;
+}
+
+.callout:not(.expanded) .callout-content {
+  max-height: 0;
+  margin: 0;
+  padding: 0;
+  opacity: 0;
+}
+
+.callout.expanded .callout-content {
+  max-height: 1000px;
+  opacity: 1;
+}
+
+/* Wikilinks */
+.wikilink {
+  color: var(--link-color, #0077cc);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.2s ease;
+}
+
+.wikilink:hover {
+  border-bottom-color: currentColor;
+}
+
+/* Images */
+.imageWrapper {
+  margin: 1rem 0;
+  border-radius: 0.5rem;
+  overflow: hidden;
+  max-width: 100%;
+}
+
+.image {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: contain;
+}
+
+/* Callout types */
+.callout-note {
+  --callout-bg: rgba(68, 138, 255, 0.1);
+  --callout-border: rgb(68, 138, 255);
+}
+
+.callout-info {
+  --callout-bg: rgba(100, 181, 246, 0.1);
+  --callout-border: rgb(100, 181, 246);
+}
+
+.callout-tip {
+  --callout-bg: rgba(76, 175, 80, 0.1);
+  --callout-border: rgb(76, 175, 80);
+}
+
+.callout-warning {
+  --callout-bg: rgba(255, 152, 0, 0.1);
+  --callout-border: rgb(255, 152, 0);
+}
+
+.callout-danger {
+  --callout-bg: rgba(244, 67, 54, 0.1);
+  --callout-border: rgb(244, 67, 54);
+}
+
+.callout-success {
+  --callout-bg: rgba(139, 195, 74, 0.1);
+  --callout-border: rgb(139, 195, 74);
+}
+
+.callout-question {
+  --callout-bg: rgba(156, 39, 176, 0.1);
+  --callout-border: rgb(156, 39, 176);
+}
+
+.callout-bug {
+  --callout-bg: rgba(244, 67, 54, 0.1);
+  --callout-border: rgb(244, 67, 54);
+}
+
+.callout-example {
+  --callout-bg: rgba(121, 85, 72, 0.1);
+  --callout-border: rgb(121, 85, 72);
+}
+
+.callout-quote {
+  --callout-bg: rgba(158, 158, 158, 0.1);
+  --callout-border: rgb(158, 158, 158);
+}
+
+.nested-callout {
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+}
