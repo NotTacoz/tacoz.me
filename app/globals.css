@@ -3,17 +3,18 @@
 @tailwind utilities;
 
 :root {
-  --background: 255 255 255;
-  --foreground: 0 0 0;
+  --foreground-rgb: 0, 0, 0;
+  --background-rgb: 255, 255, 255;
 }
 
 .dark {
-  --background: 15 23 42;
-  --foreground: 255 255 255;
+  --foreground-rgb: 255, 255, 255;
+  --background-rgb: 15, 23, 42;
 }
 
 body {
-  min-height: 100vh;
+  color: rgb(var(--foreground-rgb));
+  background-color: rgb(var(--background-rgb));
 }
 
 .prose {

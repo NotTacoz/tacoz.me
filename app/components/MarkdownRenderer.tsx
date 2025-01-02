@@ -13,26 +13,14 @@ const MarkdownRenderer: React.FC<MarkdownRendererProps> = ({ content }) => {
   return (
     <ReactMarkdown
       components={{
-        code({
-          node,
-          inline,
-          className,
-          children,
-          ...props
-        }: {
-          node: any;
-          inline?: boolean;
-          className?: string;
-          children: React.ReactNode;
-          [key: string]: any;
-        }) {
+        code({ node, inline, className, children, ...props }) {
           const match = /language-(\w+)/.exec(className || "");
           return !inline && match ? (
             <SyntaxHighlighter
-              style={tomorrow}
+              style={tomorrow as any} // Type assertion to bypass TypeScript error
               language={match[1]}
               PreTag="div"
-              {...props}
+              {...(props as any)} // Type assertion to bypass TypeScript error
             >
               {String(children).replace(/\n$/, "")}
             </SyntaxHighlighter>

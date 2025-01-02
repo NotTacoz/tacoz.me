@@ -4,7 +4,7 @@ import matter from "gray-matter";
 import MarkdownRenderer from "../../components/MarkdownRenderer";
 import { notFound } from "next/navigation";
 
-export async function generateStaticParams(): Promise<{ slug: string }[]> {
+export async function generateStaticParams() {
   const postsDirectory = path.join(process.cwd(), "posts");
   if (!fs.existsSync(postsDirectory)) {
     return [];

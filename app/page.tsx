@@ -6,7 +6,7 @@ import Link from 'next/link'
 
 export default function Home() {
   const postsDirectory = path.join(process.cwd(), 'posts')
-  let posts = []
+  let posts: { slug: string; title: any; date: any }[] = []
 
   try {
     if (fs.existsSync(postsDirectory)) {
