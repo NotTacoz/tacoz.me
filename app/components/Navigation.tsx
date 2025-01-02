@@ -22,9 +22,18 @@ export function Navigation() {
     <nav className="fixed top-0 left-0 right-0 z-50 bg-white/80 dark:bg-gray-900/80 backdrop-blur-sm border-b border-gray-200 dark:border-gray-700">
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16">
-          <Link href="/" className="text-2xl font-bold">
-            <span className="typing-effect">tacoz.me</span>
-          </Link>
+          <div className="flex items-center">
+            <Link href="/" className="text-2xl font-bold flex items-center">
+              <span className="typing-effect mr-2">tacoz.me</span>
+              <button
+                onClick={toggleTheme}
+                className="p-2 text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-transform duration-300 ease-in-out transform hover:rotate-180"
+                aria-label="Toggle theme"
+              >
+                {theme === "light" ? <Moon size={20} /> : <Sun size={20} />}
+              </button>
+            </Link>
+          </div>
           <div className="hidden md:flex items-center space-x-8">
             {navItems.map((item) => (
               <Link
@@ -40,17 +49,10 @@ export function Navigation() {
               </Link>
             ))}
           </div>
-          <div className="flex items-center">
-            <button
-              onClick={toggleTheme}
-              className="p-2 text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white"
-              aria-label="Toggle theme"
-            >
-              {theme === "light" ? <Moon size={20} /> : <Sun size={20} />}
-            </button>
+          <div className="flex items-center md:hidden">
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="ml-4 p-2 text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white md:hidden"
+              className="p-2 text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white"
               aria-label="Toggle menu"
             >
               {isMenuOpen ? <X size={20} /> : <Menu size={20} />}

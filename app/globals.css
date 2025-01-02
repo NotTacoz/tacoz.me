@@ -102,3 +102,18 @@ body {
   transform: scaleX(1);
   transform-origin: bottom left;
 }
+.callout {
+  border-left: 4px solid var(--callout-color, #2196f3);
+  padding: 1em;
+  margin: 1em 0;
+  background: #f9f9f9;
+}
+.callout-info {
+  --callout-color: #2196f3;
+}
+.callout-tip {
+  --callout-color: #4caf50;
+}
+.callout-warning {
+  --callout-color: #ff9800;
+}

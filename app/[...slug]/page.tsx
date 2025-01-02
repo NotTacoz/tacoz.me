@@ -2,6 +2,7 @@ import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
 import Link from "next/link";
+import TableOfContents from "../components/TableOfContents";
 import MarkdownRenderer from "../components/MarkdownRenderer";
 import { notFound } from "next/navigation";
 import { Folder, FileText } from "lucide-react";
@@ -63,6 +64,12 @@ export async function generateStaticParams() {
   }));
 }
 
+function estimateReadingTime(content: string): number {
+  const wordsPerMinute = 200;
+  const wordCount = content.split(/\s+/).length;
+  return Math.ceil(wordCount / wordsPerMinute);
+}
+
 export default function Post({ params }: { params: { slug?: string[] } }) {
   if (!params.slug) {
     notFound();
@@ -108,8 +115,8 @@ export default function Post({ params }: { params: { slug?: string[] } }) {
                     href={`/${folder.slug}`}
                     className="block p-4 bg-gray-100 dark:bg-gray-800 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors duration-200"
                   >
-                    <h3 className="text-xl font-semibold">
-                      <Folder className="icon text-yellow-400" />
+                    <h3 className="text-xl font-semibold text-yellow-400">
+                      <Folder className="icon text-yellow-400 inline-block mr-2" />
                       {folder.title}
                     </h3>
                   </Link>
@@ -126,7 +133,7 @@ export default function Post({ params }: { params: { slug?: string[] } }) {
                     className="block p-4 bg-gray-100 dark:bg-gray-800 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors duration-200"
                   >
                     <h3 className="text-xl font-semibold mb-2">
-                      <FileText className="icon text-blue-400" />
+                      <FileText className="icon text-blue-400 inline-block mr-2" />
                       {post.title}
                     </h3>
                     <time className="text-sm text-gray-600 dark:text-gray-400">
@@ -147,22 +154,26 @@ export default function Post({ params }: { params: { slug?: string[] } }) {
       const filePath = fs.existsSync(fullPath) ? fullPath : `${fullPath}.md`;
       const fileContents = fs.readFileSync(filePath, "utf8");
       const { data, content } = matter(fileContents);
+      const readingTime = estimateReadingTime(content);
 
       return (
         <article className="prose dark:prose-invert lg:prose-xl mx-auto">
           <h1 className="text-4xl font-bold mb-4">
             {data.title || "Untitled"}
           </h1>
-          {data.date && (
-            <p className="text-gray-600 dark:text-gray-400 mb-8">
+          <div className="flex items-center text-gray-600 dark:text-gray-400 mb-8">
+            <time>
               {new Date(data.date).toLocaleDateString("en-US", {
                 year: "numeric",
                 month: "long",
                 day: "numeric",
               })}
-            </p>
-          )}
+            </time>
+            <span className="mx-2">•</span>
+            <span>{readingTime} min read</span>
+          </div>
           <MarkdownRenderer content={content} />
+          <TableOfContents />
         </article>
       );
     }

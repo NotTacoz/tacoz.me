@@ -83,8 +83,8 @@ export default function Home() {
                 href={`/${folder.slug}`}
                 className="block p-4 bg-gray-100 dark:bg-gray-800 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors duration-200"
               >
-                <h3 className="text-xl font-semibold mb-2">
-                  <Folder className="icon text-yellow-400" />
+                <h3 className="text-xl font-semibold mb-2 text-yellow-400 flex items-center">
+                  <Folder className="icon text-yellow-400 mr-2" />
                   {folder.title}
                 </h3>
               </Link>

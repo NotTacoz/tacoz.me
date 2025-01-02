@@ -7,6 +7,13 @@ interface WikilinksRendererProps {
 
 const WikilinksRenderer: React.FC<WikilinksRendererProps> = ({ content }) => {
   const regex = /\[\[(.*?)\]\]/g;
+
+  // Check if content is a string
+  if (typeof content !== "string") {
+    console.error("Expected content to be a string, but got:", content);
+    return null; // or return a fallback UI
+  }
+
   const parts = content.split(regex);
 
   return (

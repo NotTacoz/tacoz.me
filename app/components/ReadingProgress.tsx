@@ -1,9 +1,11 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
+import { usePathname } from "next/navigation";
 
 const ReadingProgress: React.FC = () => {
   const [progress, setProgress] = useState(0);
+  const pathname = usePathname();
 
   const scrollHandler = () => {
     const totalHeight =
@@ -18,6 +20,10 @@ const ReadingProgress: React.FC = () => {
     window.addEventListener("scroll", scrollHandler);
     return () => window.removeEventListener("scroll", scrollHandler);
   }, []);
+
+  useEffect(() => {
+    setProgress(0);
+  }, [pathname]);
 
   return (
     <div className="fixed top-0 left-0 w-full h-1 bg-gray-200 dark:bg-gray-700 z-50">
