@@ -103,8 +103,10 @@ const MarkdownRenderer: React.FC<MarkdownRendererProps> = ({
           const parsedHeight = size && !isNaN(size) ? size : 400;
 
           // Handle relative paths
-          const imageSrc = src.startsWith("../")
+          const imageSrc = src.startsWith("../../")
             ? src.replace(/^\.\.\/\.\.\//, "/")
+            : src.startsWith("../")
+            ? src.replace(/^\.\.\//, "/")
             : src;
 
           return (
