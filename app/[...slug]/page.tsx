@@ -70,6 +70,7 @@ export async function generateStaticParams() {
       .filter(Boolean)
       .map((segment) => {
         // Ensure each segment is properly encoded for URL paths
+        // Use encodeURIComponent to properly handle spaces and special characters
         return encodeURIComponent(segment);
       });
 
@@ -102,15 +103,15 @@ export async function generateStaticParams() {
       const fullPath = path.join(dir, item);
       const isDirectory = fs.lstatSync(fullPath).isDirectory();
       const itemName = item.replace(/\.md$/, "");
-      const itemPath = [...basePath, encodeURIComponent(itemName)];
+      // Properly encode the item name for URL paths
+      const encodedItemName = encodeURIComponent(itemName);
+      const itemPath = [...basePath, encodedItemName];
 
       if (isDirectory) {
         paths.push({ slug: itemPath });
         paths = paths.concat(getAllPaths(fullPath, itemPath));
       } else if (item.endsWith(".md") && item !== "index.md") {
-        // Add the path without /page
         paths.push({ slug: itemPath });
-
         // Also add the path with /page for compatibility
         paths.push({ slug: [...itemPath, "page"] });
       }
@@ -159,6 +160,7 @@ function processInternalLink(content: string): string {
 }
 
 export default async function Post({ params }: PageProps) {
+  // Properly decode the slug segments for filesystem operations
   const slug = params.slug.map(decodeURIComponent).join("/");
   const fullPath = path.join(process.cwd(), "posts", slug);
 

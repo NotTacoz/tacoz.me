@@ -1,6 +1,6 @@
 ---
 title: tacoz.me
-description: A brief description of your project
+description: personal portfolio website & static site generator
 liveUrl: https://nottacoz.github.io/tacoz.me/
 githubUrl: https://github.com/NotTacoz/tacoz.me/
 status: live

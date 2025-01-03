@@ -12,37 +12,68 @@ interface PageProps {
 }
 
 export async function generateStaticParams() {
-  const postsDirectory = path.join(process.cwd(), "posts");
-  if (!fs.existsSync(postsDirectory)) {
+  // Function to recursively get all markdown files
+  function getAllMarkdownFiles(dir: string): string[] {
+    let results: string[] = [];
+    const items = fs.readdirSync(dir);
+
+    for (const item of items) {
+      const fullPath = path.join(dir, item);
+
+      if (fs.statSync(fullPath).isDirectory()) {
+        results = results.concat(getAllMarkdownFiles(fullPath));
+      } else if (item.endsWith(".md")) {
+        // Get just the filename without extension
+        const slug = item.replace(/\.md$/, "");
+        results.push(slug);
+      }
+    }
+    return results;
+  }
+
+  const blogDirectory = path.join(process.cwd(), "posts", "blog");
+  if (!fs.existsSync(blogDirectory)) {
     return [];
   }
-  const fileNames = fs.readdirSync(postsDirectory);
 
-  const slugs = fileNames
-    .filter((fileName) => fileName.endsWith(".md"))
-    .map((fileName) => fileName.replace(/\.md$/, ""));
+  // Get all markdown files from the blog directory
+  const files = getAllMarkdownFiles(blogDirectory);
 
-  // Add 'favicon.ico' to handle the missing param error
-  slugs.push("favicon.ico");
+  // Create the params array including both encoded and decoded versions
+  const params = files.flatMap((file) => [
+    { slug: file }, // Raw version
+    { slug: encodeURIComponent(file) }, // URL-encoded version
+  ]);
 
-  return slugs.map((slug) => ({
-    slug,
-  }));
+  // Add favicon.ico to handle that special case
+  params.push({ slug: "favicon.ico" });
+
+  return params;
 }
 
 export default async function Post({ params }: PageProps) {
   const slug = params.slug;
-  if (slug === "favicon.ico") {
+  // Try both encoded and decoded versions
+  const decodedSlug = decodeURIComponent(slug);
+
+  if (decodedSlug === "favicon.ico") {
     notFound();
   }
 
-  const fullPath = path.join(process.cwd(), "posts", `${slug}.md`);
+  // Try multiple possible paths in the blog directory
+  const possiblePaths = [
+    path.join(process.cwd(), "posts", "blog", `${decodedSlug}.md`),
+    path.join(process.cwd(), "posts", "blog", `${slug}.md`),
+  ];
 
-  if (!fs.existsSync(fullPath)) {
+  // Find the first path that exists
+  const filePath = possiblePaths.find((p) => fs.existsSync(p));
+
+  if (!filePath) {
     notFound();
   }
 
-  const fileContents = fs.readFileSync(fullPath, "utf8");
+  const fileContents = fs.readFileSync(filePath, "utf8");
   const { data, content } = matter(fileContents);
 
   return (
