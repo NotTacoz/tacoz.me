@@ -31,6 +31,10 @@
       "template": "posts/templates/blog.md"
     },
     {
+      "folder": "posts/projects",
+      "template": "posts/templates/project.md"
+    },
+    {
       "folder": "/",
       "template": "posts/templates/general.md"
     }

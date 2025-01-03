@@ -45,7 +45,7 @@ export function Navigation() {
                     : "text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white"
                 }`}
               >
-                {item.label}
+                <div>{item.label}</div>
               </Link>
             ))}
           </div>
@@ -73,7 +73,7 @@ export function Navigation() {
                     : "text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white hover:bg-gray-50 dark:hover:bg-gray-700"
                 }`}
               >
-                {item.label}
+                <div>{item.label}</div>
               </Link>
             ))}
           </div>
