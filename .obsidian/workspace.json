@@ -28,13 +28,13 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "posts/learning/index.md",
+                "file": "posts/hello-world.md",
                 "mode": "source",
                 "backlinks": false,
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "index"
+              "title": "hello-world"
             }
           },
           {
@@ -176,26 +176,28 @@
   },
   "active": "70b6b34b6a57423f",
   "lastOpenFiles": [
-    "out/_next/static/chunks/app/blog/[slug]/page-d6bf763c75504c96.js",
-    "out/_next/static/chunks/app/blog/page-6c94027ad409def3.js",
-    "out/_next/static/chunks/app/[...slug]/page-48c0dc0455daa668.js",
-    "out/_next/static/umwexFWVS7Kxj39nBSPrI/_ssgManifest.js",
-    "out/_next/static/umwexFWVS7Kxj39nBSPrI/_buildManifest.js",
-    "out/_next/static/umwexFWVS7Kxj39nBSPrI",
-    "out/_next/umwexFWVS7Kxj39nBSPrI",
+    "posts/setup.md",
+    "posts/blog/index.md",
+    "Archive.zip",
+    "public/testflight_feedback (1).zip",
+    "public/testflight_feedback.zip",
+    "posts/notes/index.md",
+    "posts/notes/Books/index.md",
     "posts/hello-world.md",
     "posts/learning/index.md",
-    "out/hello-world/page/index.txt",
-    "out/templates/learning/page/index.txt",
-    "out/templates/learning/page/index.html",
-    "out/templates/learning/page",
+    "app/components/CustomCursor.tsx",
+    "node_modules/@next/swc-darwin-x64",
+    "node_modules/@next/swc-linux-arm64-gnu",
+    "node_modules/@next/swc-win32-x64-msvc",
+    "node_modules/@next/swc-win32-ia32-msvc",
+    "node_modules/@next/swc-linux-x64-gnu",
+    "node_modules/@next/swc-linux-x64-musl",
+    "node_modules/next-themes/README.md",
+    "node_modules/next-themes/license.md",
+    "node_modules/fsevents/README.md",
     "out/assets/suffering.png",
-    "posts/notes/index.md",
     "posts/learning/Weekly Reflections.md",
-    "posts/page.md",
-    "posts/blog/index.md",
     "public/assets/suffering.png",
-    "posts/notes/Books/index.md",
     "posts/notes/inde.md",
     "posts/references/Math References/index.md",
     "posts/references/index.md",
@@ -212,9 +214,6 @@
     "node_modules/eslint-import-resolver-typescript/node_modules/glob-parent/CHANGELOG.md",
     "node_modules/eslint-import-resolver-typescript/node_modules/fast-glob/README.md",
     "node_modules/next/dist/compiled/@babel/runtime/README.md",
-    "node_modules/next/dist/compiled/regenerator-runtime/README.md",
-    "node_modules/next/dist/compiled/react-refresh/README.md",
-    "node_modules/next/dist/compiled/react-is/README.md",
     "assets/GgDBKAZX0AAi8C5.jpeg"
   ]
 }

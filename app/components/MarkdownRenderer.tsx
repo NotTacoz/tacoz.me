@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, ReactNode } from "react";
 import ReactMarkdown from "react-markdown";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { tomorrow } from "react-syntax-highlighter/dist/esm/styles/prism";
@@ -8,85 +8,145 @@ import Link from "next/link";
 import Image from "next/image";
 import styles from "./Callout.module.css";
 
-interface MarkdownRendererProps {
-  content: string;
-  isNested?: boolean;
+interface CalloutProps {
+  type: string;
+  foldState?: string;
+  title?: string;
+  content: ReactNode;
+  isFoldable?: boolean;
 }
+
+const getCalloutIcon = (type: string) => {
+  const icons: Record<string, string> = {
+    info: "ℹ️",
+    warning: "⚠️",
+    danger: "❗",
+    success: "✅",
+    note: "📝",
+    tip: "💡",
+    example: "🔍",
+    question: "❓",
+    quote: "💭",
+  };
+  return icons[type.toLowerCase()] || "ℹ️";
+};
+
+const Callout: React.FC<CalloutProps> = ({
+  type,
+  foldState,
+  title,
+  content,
+  isFoldable = false,
+}) => {
+  const [isExpanded, setIsExpanded] = useState<boolean>(foldState !== "-");
+  const calloutType = type.toLowerCase();
+  const displayTitle = title || type.charAt(0).toUpperCase() + type.slice(1);
+
+  useEffect(() => {
+    if (foldState) {
+      setIsExpanded(foldState !== "-");
+    }
+  }, [foldState]);
+
+  return (
+    <div
+      className={`${styles.callout} ${styles[`callout-${calloutType}`]} ${
+        isFoldable ? styles.foldable : ""
+      } ${isExpanded ? styles.expanded : ""}`}
+    >
+      <div
+        className={styles["callout-title"]}
+        onClick={() => isFoldable && setIsExpanded(!isExpanded)}
+      >
+        <strong>
+          <span className={styles["callout-icon"]}>
+            {getCalloutIcon(calloutType)}
+          </span>
+          {displayTitle}
+        </strong>
+        {isFoldable && (
+          <span className={styles["fold-indicator"]}>
+            {isExpanded ? "−" : "+"}
+          </span>
+        )}
+      </div>
+      <div className={styles["callout-content"]}>
+        <MarkdownRenderer content={content} isNested={true} />
+      </div>
+    </div>
+  );
+};
 
 const Blockquote: React.FC<{
   children: React.ReactNode;
   isNested: boolean;
 }> = ({ children, isNested }) => {
   const childrenArray = React.Children.toArray(children);
-  const [isExpanded, setIsExpanded] = useState<boolean>(true);
+  const firstChild = childrenArray[0];
 
-  let defaultExpanded = true; // Default value
-  let isFoldable = false; // Default value
+  // Helper function to extract text content from a child
+  const extractTextContent = (child: React.ReactNode): string | null => {
+    if (typeof child === "string") return child;
+    if (!child || typeof child !== "object" || !("props" in child)) return null;
 
-  if (
-    childrenArray[0] &&
-    typeof childrenArray[0] === "object" &&
-    "props" in childrenArray[0]
-  ) {
-    const textContent = childrenArray[0].props.children?.[0] || "";
-    const match = String(textContent).match(/^\[!(\w+)\]([-+])?(?:\s+(.+))?/);
-
-    if (match && !isNested) {
-      const [, , foldState] = match;
-      isFoldable = foldState === "+" || foldState === "-";
-      defaultExpanded = foldState !== "-";
+    const childContent = child.props.children;
+    if (typeof childContent === "string") return childContent;
+    if (Array.isArray(childContent)) {
+      return childContent
+        .map((c) => extractTextContent(c))
+        .filter(Boolean)
+        .join("");
     }
+    return null;
+  };
+
+  // Extract text from the first child
+  const firstChildText = extractTextContent(firstChild);
+  if (!firstChildText) {
+    return <div className={styles.blockquote}>{children}</div>;
   }
 
-  useEffect(() => {
-    setIsExpanded(defaultExpanded);
-  }, [defaultExpanded]);
-
-  if (
-    childrenArray[0] &&
-    typeof childrenArray[0] === "object" &&
-    "props" in childrenArray[0]
-  ) {
-    const textContent = childrenArray[0].props.children?.[0] || "";
-    const match = String(textContent).match(/^\[!(\w+)\]([-+])?(?:\s+(.+))?/);
-
-    if (match && !isNested) {
-      const [, type, , title] = match;
-      const cleanedContent = String(textContent)
-        .split("\n")
-        .slice(1)
-        .join("\n");
-      const calloutType = type.toLowerCase();
-      const displayTitle =
-        title || type.charAt(0).toUpperCase() + type.slice(1);
-
-      return (
-        <div
-          className={`${styles.callout} ${styles[`callout-${calloutType}`]} ${
-            isFoldable ? styles.foldable : ""
-          } ${isExpanded ? styles.expanded : ""}`}
-        >
-          <div
-            className={styles["callout-title"]}
-            onClick={() => isFoldable && setIsExpanded(!isExpanded)}
-          >
-            <strong>{displayTitle}</strong>
-            {isFoldable && (
-              <span className={styles["fold-indicator"]}>
-                {isExpanded ? "−" : "+"}
-              </span>
-            )}
-          </div>
-          <div className={styles["callout-content"]}>
-            <MarkdownRenderer content={cleanedContent} isNested={true} />
-          </div>
-        </div>
-      );
-    }
+  // Check if this is a callout
+  const calloutMatch = firstChildText
+    .trim()
+    .match(/^\[!(\w+)\]([-+])?(?:\s+(.+))?/);
+  if (!calloutMatch || isNested) {
+    return <div className={styles.blockquote}>{children}</div>;
   }
 
-  return <blockquote>{children}</blockquote>;
+  const [fullMatch, type, foldState, title] = calloutMatch;
+  const isFoldable = foldState === "+" || foldState === "-";
+
+  // Extract the content after the callout syntax
+  const remainingContent = childrenArray
+    .map((child, index) => {
+      if (index === 0) {
+        const text = extractTextContent(child);
+        if (text) {
+          return text.replace(fullMatch, "").trim();
+        }
+        return "";
+      }
+      return child;
+    })
+    .filter(Boolean)
+    .join("\n");
+
+  return (
+    <Callout
+      type={type}
+      foldState={foldState}
+      title={title}
+      content={remainingContent}
+      isFoldable={isFoldable}
+    />
+  );
 };
+
+interface MarkdownRendererProps {
+  content: ReactNode;
+  isNested?: boolean;
+}
 
 const MarkdownRenderer: React.FC<MarkdownRendererProps> = ({
   content,
@@ -98,21 +158,16 @@ const MarkdownRenderer: React.FC<MarkdownRendererProps> = ({
         img: ({ alt, src }) => {
           if (!src) return null;
 
-          // Parse size from alt text (e.g., "100" in ![100](image.png))
           const size = alt ? parseInt(alt) : undefined;
           const parsedHeight = size && !isNaN(size) ? size : 400;
 
-          // Handle relative paths
           let imageSrc = src;
-
-          // Handle any number of relative path segments (../../ or ../../../)
           if (src.includes("../assets/")) {
             imageSrc = `/assets/${src.split("assets/")[1]}`;
           } else if (!src.startsWith("/") && !src.startsWith("http")) {
             imageSrc = `/assets/${src}`;
           }
 
-          // Add basePath in production
           if (process.env.NODE_ENV === "production") {
             imageSrc = `/tacoz.me${imageSrc}`;
           }
@@ -151,7 +206,7 @@ const MarkdownRenderer: React.FC<MarkdownRendererProps> = ({
           const match = /language-(\w+)/.exec(className || "");
           return !inline && match ? (
             <SyntaxHighlighter
-              // @ts-expect-error -- Type mismatch between tomorrow theme and component props
+              // @ts-expect-error  Type mismatch between tomorrow theme and component props
               style={tomorrow}
               language={match[1]}
               PreTag="div"
@@ -167,7 +222,7 @@ const MarkdownRenderer: React.FC<MarkdownRendererProps> = ({
         },
       }}
     >
-      {content}
+      {String(content)}
     </ReactMarkdown>
   );
 };

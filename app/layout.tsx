@@ -48,9 +48,7 @@ export default function RootLayout({
               {children}
             </main>
             <footer className="text-center py-4 text-sm">
-              <p className="mb-2">
-                &copy; {new Date().getFullYear()} tacoz. All rights reserved.
-              </p>
+              <p className="mb-2">&copy; {new Date().getFullYear()} tacoz.</p>
               <div className="flex justify-center space-x-4">
                 <a
                   href="https://github.com/NotTacoz"

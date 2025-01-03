@@ -5,11 +5,49 @@
 :root {
   --foreground-rgb: 0, 0, 0;
   --background-rgb: 255, 255, 255;
+  --gradient-1: #ff6b6b;
+  --gradient-2: #4ecdc4;
+  --gradient-3: #45b8ac;
 }
 
 .dark {
   --foreground-rgb: 255, 255, 255;
   --background-rgb: 18, 18, 18;
+  --gradient-1: #2c3e50;
+  --gradient-2: #3498db;
+  --gradient-3: #2980b9;
+}
+
+/* Animated gradient background */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    45deg,
+    var(--gradient-1),
+    var(--gradient-2),
+    var(--gradient-3)
+  );
+  opacity: 0.05;
+  z-index: -1;
+  animation: gradientBG 15s ease infinite;
+  background-size: 200% 200%;
+}
+
+@keyframes gradientBG {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
 }
 
 body {
@@ -102,18 +140,50 @@ body {
   transform: scaleX(1);
   transform-origin: bottom left;
 }
+
 .callout {
   border-left: 4px solid var(--callout-color, #2196f3);
   padding: 1em;
   margin: 1em 0;
   background: #f9f9f9;
 }
+
 .callout-info {
   --callout-color: #2196f3;
 }
+
 .callout-tip {
   --callout-color: #4caf50;
 }
+
 .callout-warning {
   --callout-color: #ff9800;
+}
+
+/* Card hover effects */
+.hover-card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.hover-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Enhanced blockquote for a clean monospace aesthetic */
+blockquote {
+  font-family: "Courier New", Courier, monospace;
+  background-color: #f5f5f5;
+  border-left: 4px solid #4a90e2;
+  padding: 1rem 1.5rem;
+  margin: 1.5rem 0;
+  border-radius: 4px;
+  color: #333;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+blockquote::before,
+blockquote::after {
+  content: none;
 }
