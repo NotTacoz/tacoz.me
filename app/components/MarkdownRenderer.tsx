@@ -103,13 +103,14 @@ const MarkdownRenderer: React.FC<MarkdownRendererProps> = ({
           const parsedHeight = size && !isNaN(size) ? size : 400;
 
           // Handle relative paths
-          let imageSrc = src.startsWith("../assets/")
-            ? src.replace(/^(\.\.\/)+assets\//, "/assets/")
-            : !src.startsWith("/") && !src.startsWith("http")
-            ? `/assets/${src}`
-            : src.startsWith("/assets/")
-            ? src
-            : src;
+          let imageSrc = src;
+
+          // Handle any number of relative path segments (../../ or ../../../)
+          if (src.includes("../assets/")) {
+            imageSrc = `/assets/${src.split("assets/")[1]}`;
+          } else if (!src.startsWith("/") && !src.startsWith("http")) {
+            imageSrc = `/assets/${src}`;
+          }
 
           // Add basePath in production
           if (process.env.NODE_ENV === "production") {
