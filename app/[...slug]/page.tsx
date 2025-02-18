@@ -16,6 +16,17 @@ interface PostData {
 
 const ignoredFolders = [".obsidian", ".git", "node_modules", "assets"];
 
+interface FileData {
+  title?: string;
+  date?: string;
+  content: string;
+}
+
+function convertToMarkdown(content: string, fileExtension: string): string {
+  // Convert the file content to a markdown code block with appropriate language
+  return `\`\`\`${fileExtension}\n${content}\n\`\`\``;
+}
+
 function getPostsData(dir: string, baseSlug: string = ""): PostData[] {
   const postsDirectory = path.join(process.cwd(), dir);
   let posts: PostData[] = [];
@@ -27,7 +38,10 @@ function getPostsData(dir: string, baseSlug: string = ""): PostData[] {
       const fullPath = path.join(postsDirectory, item);
       const isDirectory = fs.lstatSync(fullPath).isDirectory();
       const slug = path
-        .join(baseSlug, isDirectory ? `${item}/` : item.replace(/\.md$/, ""))
+        .join(
+          baseSlug,
+          isDirectory ? `${item}/` : item.replace(/\.(md|cpp|py)$/, "")
+        )
         .replace(/\\/g, "/");
 
       if (isDirectory) {
@@ -40,13 +54,33 @@ function getPostsData(dir: string, baseSlug: string = ""): PostData[] {
           });
           posts = posts.concat(getPostsData(fullPath, slug));
         }
-      } else if (item.endsWith(".md") && item !== "index.md") {
+      } else if (item.match(/\.(md|cpp|py)$/) && item !== "index.md") {
         const fileContents = fs.readFileSync(fullPath, "utf8");
-        const { data } = matter(fileContents);
+        let fileData: FileData;
+
+        if (item.endsWith(".md")) {
+          const { data, content } = matter(fileContents);
+          fileData = {
+            title: data.title,
+            date: data.date,
+            content,
+          };
+        } else {
+          // For .cpp and .py files, convert to markdown code block
+          fileData = {
+            title: item.replace(/\.(cpp|py)$/, ""),
+            date: fs.statSync(fullPath).mtime.toISOString(),
+            content: convertToMarkdown(
+              fileContents,
+              path.extname(item).slice(1)
+            ),
+          };
+        }
+
         posts.push({
           slug: encodeURI(slug),
-          title: data.title || item.replace(/\.md$/, ""),
-          date: data.date || new Date().toISOString(),
+          title: fileData.title || item.replace(/\.(md|cpp|py)$/, ""),
+          date: fileData.date || new Date().toISOString(),
           isFolder: false,
         });
       }
@@ -102,7 +136,7 @@ export async function generateStaticParams() {
 
       const fullPath = path.join(dir, item);
       const isDirectory = fs.lstatSync(fullPath).isDirectory();
-      const itemName = item.replace(/\.md$/, "");
+      const itemName = item.replace(/\.(md|cpp|py)$/, "");
       // Properly encode the item name for URL paths
       const encodedItemName = encodeURIComponent(itemName);
       const itemPath = [...basePath, encodedItemName];
@@ -110,7 +144,7 @@ export async function generateStaticParams() {
       if (isDirectory) {
         paths.push({ slug: itemPath });
         paths = paths.concat(getAllPaths(fullPath, itemPath));
-      } else if (item.endsWith(".md") && item !== "index.md") {
+      } else if (item.match(/\.(md|cpp|py)$/) && item !== "index.md") {
         paths.push({ slug: itemPath });
         // Also add the path with /page for compatibility
         paths.push({ slug: [...itemPath, "page"] });
@@ -164,10 +198,22 @@ export default async function Post({ params }: PageProps) {
   const slug = params.slug.map(decodeURIComponent).join("/");
   const fullPath = path.join(process.cwd(), "posts", slug);
 
-  if (fs.existsSync(fullPath) || fs.existsSync(`${fullPath}.md`)) {
+  // Check for .md, .cpp, or .py files
+  const possibleExtensions = [".md", ".cpp", ".py"];
+  let existingFile = "";
+  for (const ext of possibleExtensions) {
+    const filePath = `${fullPath}${ext}`;
+    if (fs.existsSync(filePath)) {
+      existingFile = filePath;
+      break;
+    }
+  }
+
+  if (fs.existsSync(fullPath) || existingFile) {
     const stats = fs.existsSync(fullPath)
       ? fs.lstatSync(fullPath)
-      : fs.lstatSync(`${fullPath}.md`);
+      : fs.lstatSync(existingFile);
+
     if (stats.isDirectory()) {
       // Render folder page
       const posts = getPostsData(path.join("posts", slug), slug);
@@ -236,30 +282,52 @@ export default async function Post({ params }: PageProps) {
         </div>
       );
     } else {
-      // Render individual post
-      const filePath = fs.existsSync(fullPath) ? fullPath : `${fullPath}.md`;
+      // Render individual file
+      const filePath = existingFile || fullPath;
       const fileContents = fs.readFileSync(filePath, "utf8");
-      const { data, content } = matter(fileContents);
-      const readingTime = estimateReadingTime(content);
-      const processedContent = processInternalLink(content);
+      let fileData: FileData;
+
+      if (filePath.endsWith(".md")) {
+        const { data, content } = matter(fileContents);
+        fileData = {
+          title: data.title,
+          date: data.date,
+          content: processInternalLink(content),
+        };
+      } else {
+        // For .cpp and .py files
+        fileData = {
+          title: path.basename(filePath).replace(/\.(cpp|py)$/, ""),
+          date: stats.mtime.toISOString(),
+          content: convertToMarkdown(
+            fileContents,
+            path.extname(filePath).slice(1)
+          ),
+        };
+      }
+
+      const readingTime = estimateReadingTime(fileData.content);
 
       return (
         <article className="prose dark:prose-invert lg:prose-xl mx-auto">
           <h1 className="text-4xl font-bold mb-4">
-            {data.title || "Untitled"}
+            {fileData.title || "Untitled"}
           </h1>
           <div className="flex items-center text-gray-600 dark:text-gray-400 mb-8">
             <time>
-              {new Date(data.date).toLocaleDateString("en-US", {
-                year: "numeric",
-                month: "long",
-                day: "numeric",
-              })}
+              {new Date(fileData.date || new Date()).toLocaleDateString(
+                "en-US",
+                {
+                  year: "numeric",
+                  month: "long",
+                  day: "numeric",
+                }
+              )}
             </time>
             <span className="mx-2">•</span>
             <span>{readingTime} min read</span>
           </div>
-          <MarkdownRenderer content={processedContent} />
+          <MarkdownRenderer content={fileData.content} />
           <TableOfContents />
         </article>
       );
