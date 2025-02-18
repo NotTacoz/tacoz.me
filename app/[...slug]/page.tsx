@@ -37,18 +37,33 @@ function getPostsData(dir: string, baseSlug: string = ""): PostData[] {
     for (const item of items) {
       const fullPath = path.join(postsDirectory, item);
       const isDirectory = fs.lstatSync(fullPath).isDirectory();
+
+      // Handle file extensions consistently
+      const cleanName = isDirectory ? item : item.replace(/\.(md|cpp|py)$/, "");
+
       const slug = path
-        .join(
-          baseSlug,
-          isDirectory ? `${item}/` : item.replace(/\.(md|cpp|py)$/, "")
-        )
+        .join(baseSlug, isDirectory ? `${cleanName}/` : cleanName)
         .replace(/\\/g, "/");
+
+      // More consistent encoding that preserves spaces
+      const encodedSlug = slug
+        .split("/")
+        .map((segment) => {
+          // First decode in case it's already encoded
+          try {
+            const decoded = decodeURIComponent(segment);
+            return encodeURIComponent(decoded);
+          } catch {
+            return encodeURIComponent(segment);
+          }
+        })
+        .join("/");
 
       if (isDirectory) {
         if (!ignoredFolders.includes(item)) {
           posts.push({
-            slug: encodeURIComponent(slug),
-            title: item,
+            slug: encodedSlug,
+            title: cleanName,
             date: new Date().toISOString(),
             isFolder: true,
           });
@@ -68,7 +83,7 @@ function getPostsData(dir: string, baseSlug: string = ""): PostData[] {
         } else {
           // For .cpp and .py files, convert to markdown code block
           fileData = {
-            title: item.replace(/\.(cpp|py)$/, ""),
+            title: cleanName,
             date: fs.statSync(fullPath).mtime.toISOString(),
             content: convertToMarkdown(
               fileContents,
@@ -78,8 +93,8 @@ function getPostsData(dir: string, baseSlug: string = ""): PostData[] {
         }
 
         posts.push({
-          slug: encodeURIComponent(slug),
-          title: fileData.title || item.replace(/\.(md|cpp|py)$/, ""),
+          slug: encodedSlug,
+          title: fileData.title || cleanName,
           date: fileData.date || new Date().toISOString(),
           isFolder: false,
         });
@@ -104,8 +119,8 @@ export async function generateStaticParams() {
         .split("/")
         .filter(Boolean)
         .map((segment) => {
+          // Ensure consistent encoding
           try {
-            // Ensure we're not double-encoding
             const decoded = decodeURIComponent(segment);
             return encodeURIComponent(decoded);
           } catch {
@@ -134,7 +149,7 @@ export async function generateStaticParams() {
     }
   }, []);
 
-  // Get all files and directories recursively
+  // Get all files and directories recursively with consistent encoding
   function getAllPaths(
     dir: string,
     basePath: string[] = []
@@ -150,16 +165,21 @@ export async function generateStaticParams() {
         const isDirectory = fs.lstatSync(fullPath).isDirectory();
         const itemName = item.replace(/\.(md|cpp|py)$/, "");
 
-        // Ensure we're not double-encoding
-        const decodedName = decodeURIComponent(itemName);
-        const encodedItemName = encodeURIComponent(decodedName);
-        const itemPath = [...basePath, encodedItemName];
+        // Ensure consistent encoding
+        try {
+          const decoded = decodeURIComponent(itemName);
+          const encodedItemName = encodeURIComponent(decoded);
+          const itemPath = [...basePath, encodedItemName];
 
-        if (isDirectory) {
-          paths.push({ slug: itemPath });
-          paths = paths.concat(getAllPaths(fullPath, itemPath));
-        } else if (item.match(/\.(md|cpp|py)$/) && item !== "index.md") {
-          paths.push({ slug: itemPath });
+          if (isDirectory) {
+            paths.push({ slug: itemPath });
+            paths = paths.concat(getAllPaths(fullPath, itemPath));
+          } else if (item.match(/\.(md|cpp|py)$/) && item !== "index.md") {
+            paths.push({ slug: itemPath });
+          }
+        } catch (error) {
+          console.warn(`Error encoding path: ${item}`, error);
+          continue;
         }
       } catch (error) {
         console.warn(`Error processing path: ${item}`, error);
