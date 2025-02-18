@@ -28,7 +28,7 @@
 
 .calloutToggle {
   cursor: pointer;
-  font-size: 1.2em;
+  /* font-size: 1.2em; */
   user-select: none;
   color: #a0a0a0;
 }
@@ -129,11 +129,18 @@
   background-color: rgba(158, 158, 158, 0.1);
   border-left: 4px solid #9e9e9e;
   color: #e0e0e0;
+  font-style: normal;
+  quotes: none;
 }
 
 .blockquote p {
   margin: 0;
   line-height: 1.5;
+}
+
+.blockquote::before,
+.blockquote::after {
+  content: none;
 }
 
 .blockquote a {

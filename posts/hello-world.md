@@ -18,6 +18,7 @@ need a smaller image? no problem! use \[height](image url) to specify
 ## callouts
 
 > Here's a default callout block.
+> 
 > It supports **Markdown**, and [embeds](https://youtube.com)!
 
 >[!warning] Warning 

@@ -112,11 +112,7 @@ const CustomBlockquote: React.FC<{ children: React.ReactNode }> = ({
   const calloutData = processCalloutContent(content);
 
   if (!calloutData) {
-    return (
-      <blockquote className={styles.blockquote}>
-        <ReactMarkdown>{content}</ReactMarkdown>
-      </blockquote>
-    );
+    return <blockquote className={styles.blockquote}>{children}</blockquote>;
   }
 
   return (
