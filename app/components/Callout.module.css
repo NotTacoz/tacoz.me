@@ -5,6 +5,7 @@
   background-color: #1e1e1e;
   color: #e0e0e0;
   border-left: 4px solid;
+  font-size: 1rem;
 }
 
 .calloutHeader {
@@ -12,6 +13,7 @@
   align-items: center;
   gap: 12px;
   margin-bottom: 0.5em;
+  font-size: 1rem;
 }
 
 .calloutIcon {
@@ -24,6 +26,7 @@
   font-weight: 600;
   color: #ffffff;
   flex-grow: 1;
+  font-size: 1rem;
 }
 
 .calloutToggle {
@@ -36,6 +39,7 @@
 .calloutContent {
   color: #d0d0d0;
   line-height: 1.5;
+  font-size: 1rem;
 }
 
 .callout blockquote {
@@ -131,11 +135,13 @@
   color: #e0e0e0;
   font-style: normal;
   quotes: none;
+  font-size: 1rem;
 }
 
 .blockquote p {
   margin: 0;
   line-height: 1.5;
+  font-size: 1rem;
 }
 
 .blockquote::before,
