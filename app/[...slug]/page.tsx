@@ -103,9 +103,8 @@ export async function generateStaticParams() {
       .split("/")
       .filter(Boolean)
       .map((segment) => {
-        // Ensure each segment is properly encoded for URL paths
-        // Use encodeURIComponent to properly handle spaces and special characters
-        return encodeURIComponent(segment);
+        // Use encodeURIComponent for proper URL encoding of spaces and special characters
+        return encodeURIComponent(decodeURIComponent(segment));
       });
 
     // Add the full path
@@ -195,7 +194,9 @@ function processInternalLink(content: string): string {
 
 export default async function Post({ params }: PageProps) {
   // Properly decode the slug segments for filesystem operations
-  const slug = params.slug.map(decodeURIComponent).join("/");
+  const slug = params.slug
+    .map((segment) => decodeURIComponent(decodeURIComponent(segment)))
+    .join("/");
   const fullPath = path.join(process.cwd(), "posts", slug);
 
   // Check for .md, .cpp, or .py files

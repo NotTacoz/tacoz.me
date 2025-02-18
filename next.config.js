@@ -16,6 +16,14 @@ const nextConfig = {
     outputFileTracingIncludes: [
      './posts/assets/**/*'
     ],
+    pageExtensions: ['js', 'jsx', 'ts', 'tsx'],
+    webpack: (config) => {
+        config.module.rules.push({
+            test: /\.md$/,
+            use: 'raw-loader',
+        });
+        return config;
+    },
 };
 
 module.exports = nextConfig;
