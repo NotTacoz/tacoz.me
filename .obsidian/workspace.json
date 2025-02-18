@@ -13,13 +13,13 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "posts/learning/index.md",
+                "file": "posts/hello-world.md",
                 "mode": "source",
                 "backlinks": false,
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "index"
+              "title": "hello-world"
             }
           }
         ]
@@ -164,6 +164,7 @@
   },
   "active": "6df6bda9cee706df",
   "lastOpenFiles": [
+    "posts/learning/index.md",
     "posts/learning/Leetcode/Blind 75/Arrays & Hashing/index.md",
     "posts/learning/Leetcode/Blind 75/index.md",
     "posts/learning/Leetcode/Advent of Code/index.md",
@@ -195,7 +196,6 @@
     "posts/learning/Curtin/Y1S1/COMP1005/Lectures/4. Multi-dimensional Arrays and Functions.md",
     "posts/learning/Curtin/Y1S1/COMP1005/Lectures/2. Strings and Lists.md",
     "posts/learning/Curtin/Y1S1/COMP1005/Lectures/1. Introduction to Linux and Python.md",
-    "posts/learning/index.md",
     "posts/templates/references.md",
     "posts/templates/project.md",
     "posts/templates/notes.md",

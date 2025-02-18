@@ -16,21 +16,17 @@ need a smaller image? no problem! use \[height](image url) to specify
 
 
 ## callouts
-note: callouts are still very broken and i need to fix it
 
-> Here's a callout block.
->It supports **Markdown**, and [embeds](https://youtube.com)!
+> Here's a default callout block.
+> It supports **Markdown**, and [embeds](https://youtube.com)!
 
 >[!warning] Warning 
 >You have been warned
 
->[!Info] This is an Info callout
->This is some very informative information!
->text text text
-
-> [!note] This is a simple note callout.
->
->  It can contain multiple lines of text.
+> [!note] My Note
+> This is a simple note callout.
+> 
+> It contains multiple lines of text
 ## Code Example
 
 ```javascript

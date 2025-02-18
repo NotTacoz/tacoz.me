@@ -1,20 +1,48 @@
 .callout {
-  border-radius: 0.5rem;
-  padding: 1rem;
-  margin: 1rem 0;
+  margin: 1em 0;
+  padding: 1em;
+  border-radius: 8px;
+  background-color: #1e1e1e;
+  color: #e0e0e0;
   border-left: 4px solid;
-  background-color: var(--callout-bg);
+}
+
+.calloutHeader {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 0.5em;
+}
+
+.calloutIcon {
+  font-size: 1.2em;
+  display: flex;
+  align-items: center;
+}
+
+.calloutTitle {
+  font-weight: 600;
+  color: #ffffff;
+  flex-grow: 1;
+}
+
+.calloutToggle {
+  cursor: pointer;
+  font-size: 1.2em;
+  user-select: none;
+  color: #a0a0a0;
+}
+
+.calloutContent {
+  color: #d0d0d0;
+  line-height: 1.5;
 }
 
 .callout blockquote {
-  quotes: none;
+  border: none;
   margin: 0;
   padding: 0;
-}
-
-.callout blockquote::before,
-.callout blockquote::after {
-  content: none;
+  background: none;
 }
 
 .callout-title {
@@ -47,107 +75,97 @@
   display: block;
 }
 
-/* Callout types */
+/* Callout types - Dark theme specific colors */
 .callout-info {
-  border-left-color: #3b82f6;
-  background-color: #dbeafe;
+  background-color: rgba(0, 122, 255, 0.1);
+  border-left-color: #007aff;
 }
 
 .callout-warning {
-  border-left-color: #f59e0b;
-  background-color: #fef3c7;
+  background-color: rgba(255, 149, 0, 0.1);
+  border-left-color: #ff9500;
 }
 
 .callout-danger {
-  border-left-color: #ef4444;
-  background-color: #fee2e2;
+  background-color: rgba(255, 59, 48, 0.1);
+  border-left-color: #ff3b30;
 }
 
 .callout-success {
-  border-left-color: #10b981;
-  background-color: #d1fae5;
+  background-color: rgba(52, 199, 89, 0.1);
+  border-left-color: #34c759;
 }
 
 .callout-note {
-  border-left-color: #6b7280;
-  background-color: #f3f4f6;
+  background-color: rgba(68, 138, 255, 0.1);
+  border-left-color: #448aff;
 }
 
 .callout-tip {
-  border-left-color: #8b5cf6;
-  background-color: #ede9fe;
+  background-color: rgba(0, 191, 165, 0.1);
+  border-left-color: #00bfa5;
 }
 
 .callout-example {
-  border-left-color: #14b8a6;
-  background-color: #ccfbf1;
+  background-color: rgba(124, 77, 255, 0.1);
+  border-left-color: #7c4dff;
 }
 
 .callout-question {
-  border-left-color: #ec4899;
-  background-color: #fce7f3;
+  background-color: rgba(100, 221, 23, 0.1);
+  border-left-color: #64dd17;
 }
 
 .callout-quote {
-  border-left-color: #6366f1;
-  background-color: #e0e7ff;
+  background-color: rgba(158, 158, 158, 0.1);
+  border-left-color: #9e9e9e;
 }
 
-/* Dark mode support */
-@media (prefers-color-scheme: dark) {
-  .callout {
-    background-color: rgba(255, 255, 255, 0.05);
-  }
-
-  .callout-info {
-    background-color: rgba(59, 130, 246, 0.1);
-  }
-
-  .callout-warning {
-    background-color: rgba(245, 158, 11, 0.1);
-  }
-
-  .callout-danger {
-    background-color: rgba(239, 68, 68, 0.1);
-  }
-
-  .callout-success {
-    background-color: rgba(16, 185, 129, 0.1);
-  }
-
-  .callout-note {
-    background-color: rgba(107, 114, 128, 0.1);
-  }
-
-  .callout-tip {
-    background-color: rgba(139, 92, 246, 0.1);
-  }
-
-  .callout-example {
-    background-color: rgba(20, 184, 166, 0.1);
-  }
-
-  .callout-question {
-    background-color: rgba(236, 72, 153, 0.1);
-  }
-
-  .callout-quote {
-    background-color: rgba(99, 102, 241, 0.1);
-  }
-}
-
+/* Regular blockquote styling */
 .blockquote {
   margin: 1rem 0;
-  padding: 0.5rem 0 0.5rem 1rem;
-  border-left: 4px solid #e5e7eb;
-  color: #4b5563;
-  font-style: italic;
+  padding: 1rem;
+  border-radius: 8px;
+  background-color: rgba(158, 158, 158, 0.1);
+  border-left: 4px solid #9e9e9e;
+  color: #e0e0e0;
 }
 
-/* Dark mode support for blockquotes */
-@media (prefers-color-scheme: dark) {
-  .blockquote {
-    border-left-color: #374151;
-    color: #9ca3af;
-  }
+.blockquote p {
+  margin: 0;
+  line-height: 1.5;
+}
+
+.blockquote a {
+  color: #3b82f6;
+  text-decoration: none;
+}
+
+.blockquote a:hover {
+  text-decoration: underline;
+}
+
+.blockquote code {
+  background-color: rgba(255, 255, 255, 0.1);
+  padding: 0.2em 0.4em;
+  border-radius: 3px;
+  font-family: monospace;
+}
+
+/* Links inside callouts */
+.callout a {
+  color: #3b82f6;
+  text-decoration: none;
+}
+
+.callout a:hover {
+  text-decoration: underline;
+}
+
+/* Code blocks inside callouts */
+.callout code {
+  background-color: rgba(255, 255, 255, 0.1);
+  padding: 0.2em 0.4em;
+  border-radius: 3px;
+  font-family: monospace;
 }
