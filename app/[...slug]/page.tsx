@@ -47,7 +47,7 @@ function getPostsData(dir: string, baseSlug: string = ""): PostData[] {
       if (isDirectory) {
         if (!ignoredFolders.includes(item)) {
           posts.push({
-            slug: encodeURI(slug),
+            slug: encodeURIComponent(slug),
             title: item,
             date: new Date().toISOString(),
             isFolder: true,
@@ -78,7 +78,7 @@ function getPostsData(dir: string, baseSlug: string = ""): PostData[] {
         }
 
         posts.push({
-          slug: encodeURI(slug),
+          slug: encodeURIComponent(slug),
           title: fileData.title || item.replace(/\.(md|cpp|py)$/, ""),
           date: fileData.date || new Date().toISOString(),
           isFolder: false,
@@ -195,8 +195,22 @@ function processInternalLink(content: string): string {
 export default async function Post({ params }: PageProps) {
   // Properly decode the slug segments for filesystem operations
   const slug = params.slug
-    .map((segment) => decodeURIComponent(decodeURIComponent(segment)))
+    .map((segment) => {
+      try {
+        // Handle double-encoded segments
+        return decodeURIComponent(decodeURIComponent(segment));
+      } catch {
+        // If double-decoding fails, try single decode
+        try {
+          return decodeURIComponent(segment);
+        } catch {
+          // If decoding fails, return as is
+          return segment;
+        }
+      }
+    })
     .join("/");
+
   const fullPath = path.join(process.cwd(), "posts", slug);
 
   // Check for .md, .cpp, or .py files
@@ -267,7 +281,7 @@ export default async function Post({ params }: PageProps) {
                   >
                     <h3 className="text-xl font-semibold mb-2">
                       <FileText className="icon text-blue-400 inline-block mr-2" />
-                      {post.title}
+                      {decodeURIComponent(post.title)}
                     </h3>
                     <time className="text-sm text-gray-600 dark:text-gray-400">
                       {new Date(post.date).toLocaleDateString("en-US", {

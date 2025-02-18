@@ -17,7 +17,7 @@ export const metadata = {
   description:
     "A unique digital garden built with Next.js and Obsidian Markdown",
   icons: {
-    icon: process.env.NODE_ENV === 'production' ? '/tacoz.me/favicon.ico' : '/favicon.ico',
+    icon: "/favicon.ico",
   },
 };
 

@@ -13,9 +13,6 @@ const nextConfig = {
     },
     trailingSlash: true,
     assetPrefix: process.env.NODE_ENV === 'production' ? '/tacoz.me' : '',
-    outputFileTracingIncludes: [
-     './posts/assets/**/*'
-    ],
     pageExtensions: ['js', 'jsx', 'ts', 'tsx'],
     webpack: (config) => {
         config.module.rules.push({
@@ -23,7 +20,7 @@ const nextConfig = {
             use: 'raw-loader',
         });
         return config;
-    },
+    }
 };
 
 module.exports = nextConfig;
