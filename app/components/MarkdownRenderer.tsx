@@ -162,32 +162,49 @@ const MarkdownRenderer: React.FC<MarkdownRendererProps> = ({
           const parsedHeight = size && !isNaN(size) ? size : 400;
 
           let imageSrc = src;
-          if (src.includes("../assets/")) {
-            imageSrc = `/assets/${src.split("assets/")[1]}`;
-          } else if (!src.startsWith("/") && !src.startsWith("http")) {
-            imageSrc = `/assets/${src}`;
+          try {
+            // Handle relative paths
+            if (src.includes("../assets/")) {
+              imageSrc = `/assets/${src.split("assets/")[1]}`;
+            } else if (!src.startsWith("/") && !src.startsWith("http")) {
+              imageSrc = `/assets/${src}`;
+            }
+
+            // Ensure the path is properly encoded
+            const urlParts = imageSrc.split("/");
+            const encodedParts = urlParts.map((part) => {
+              try {
+                // Decode first to prevent double-encoding
+                const decoded = decodeURIComponent(part);
+                return encodeURIComponent(decoded);
+              } catch {
+                return encodeURIComponent(part);
+              }
+            });
+            imageSrc = encodedParts.join("/");
+
+            if (process.env.NODE_ENV === "production") {
+              imageSrc = `/tacoz.me${imageSrc}`;
+            }
+
+            return (
+              <span className="flex justify-center items-center w-full">
+                <Image
+                  src={imageSrc}
+                  alt={alt || ""}
+                  height={parsedHeight}
+                  width={parsedHeight}
+                  priority={false}
+                  quality={75}
+                  style={{ height: `${parsedHeight}px`, width: "auto" }}
+                  className="rounded-lg"
+                />
+              </span>
+            );
+          } catch (error) {
+            console.error("Error processing image path:", error);
+            return null;
           }
-
-          if (process.env.NODE_ENV === "production") {
-            imageSrc = `/tacoz.me${imageSrc}`;
-          }
-
-          console.log("Transformed src:", imageSrc);
-
-          return (
-            <span className="flex justify-center items-center w-full">
-              <Image
-                src={imageSrc}
-                alt={alt || ""}
-                height={parsedHeight}
-                width={parsedHeight}
-                priority={false}
-                quality={75}
-                style={{ height: `${parsedHeight}px`, width: "auto" }}
-                className="rounded-lg"
-              />
-            </span>
-          );
         },
         blockquote: ({ children }) => (
           <Blockquote isNested={isNested}>{children}</Blockquote>
