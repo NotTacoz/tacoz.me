@@ -8,172 +8,124 @@
         "type": "tabs",
         "children": [
           {
-            "id": "92f02a96f749b49a",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "posts/hello-world.md",
-                "mode": "source",
-                "backlinks": false,
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "hello-world"
-            }
-          },
-          {
-            "id": "70b6b34b6a57423f",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "posts/projects/tacoz.me.md",
-                "mode": "source",
-                "backlinks": false,
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "tacoz.me"
-            }
-          },
-          {
-            "id": "bda84f5c33eab758",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "posts/projects/TacoBot.md",
-                "mode": "source",
-                "backlinks": false,
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "TacoBot"
-            }
-          },
-          {
-            "id": "25a9be8a655d84fb",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "posts/projects/Abyss Media.md",
-                "mode": "source",
-                "backlinks": false,
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "Abyss Media"
-            }
-          },
-          {
-            "id": "9c14785fdce12cc3",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "posts/projects/Abyss Media.md",
-                "mode": "source",
-                "backlinks": false,
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "Abyss Media"
-            }
-          },
-          {
-            "id": "f1e63d55749512d6",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "posts/projects/Abyss Media.md",
-                "mode": "source",
-                "backlinks": false,
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "Abyss Media"
-            }
-          },
-          {
-            "id": "6dc730637f9fe61c",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "posts/projects/tacoz.me.md",
-                "mode": "source",
-                "backlinks": false,
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "tacoz.me"
-            }
-          },
-          {
-            "id": "1e357c8d30d93050",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "posts/hello-world.md",
-                "mode": "source",
-                "backlinks": false,
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "hello-world"
-            }
-          },
-          {
-            "id": "06d8c5eeb9c3c820",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "posts/projects/Abyss Media.md",
-                "mode": "source",
-                "backlinks": false,
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "Abyss Media"
-            }
-          },
-          {
-            "id": "3ec961d60b5eef90",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "posts/blog/Rules.md",
-                "mode": "source",
-                "backlinks": false,
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "Rules"
-            }
-          },
-          {
             "id": "f28c45769b89214a",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "posts/blog/1 Year of Anki told in Data.md",
+                "file": "posts/notes/Books/index.md",
                 "mode": "source",
                 "backlinks": false,
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "1 Year of Anki told in Data"
+              "title": "index"
+            }
+          },
+          {
+            "id": "0dc28f2fae5e595c",
+            "type": "leaf",
+            "state": {
+              "type": "pdf",
+              "state": {
+                "file": "posts/learning/Curtin/Y1S1/COMP1005/COMP1005 Fundamentals of Programming Semester 1 2024 Bentley Perth Campus INT.pdf"
+              },
+              "icon": "lucide-file-text",
+              "title": "COMP1005 Fundamentals of Programming Semester 1 2024 Bentley Perth Campus INT"
+            }
+          },
+          {
+            "id": "396e3bb04576a79e",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "posts/learning/Curtin/Y1S1/COMP1005/Lectures/10. Applications - Data Processing and Analytics.md",
+                "mode": "source",
+                "backlinks": false,
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "10. Applications - Data Processing and Analytics"
+            }
+          },
+          {
+            "id": "21cdfb438ddf45fc",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "posts/learning/Curtin/Y1S1/COMP1005/Lectures/3. Arrays and Plotting.md",
+                "mode": "source",
+                "backlinks": false,
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "3. Arrays and Plotting"
+            }
+          },
+          {
+            "id": "ea661d2f61f17546",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "posts/notes/Books/operating-systems.md",
+                "mode": "source",
+                "backlinks": false,
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "operating-systems"
+            }
+          },
+          {
+            "id": "8a845b1557a03e27",
+            "type": "leaf",
+            "state": {
+              "type": "excalidraw",
+              "state": {
+                "file": "Excalidraw/Drawing 2025-01-16 12.48.47.excalidraw.md"
+              },
+              "icon": "excalidraw-icon",
+              "title": "Drawing 2025-01-16 12.48.47.excalidraw"
+            }
+          },
+          {
+            "id": "6df6bda9cee706df",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "posts/notes/Books/introductions to computing systems.md",
+                "mode": "source",
+                "backlinks": false,
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "introductions to computing systems"
             }
           }
         ],
-        "currentTab": 10
+        "currentTab": 3
+      },
+      {
+        "id": "ff10a2ea6b304126",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "33d4dc1bf8a22b75",
+            "type": "leaf",
+            "state": {
+              "type": "pdf",
+              "state": {
+                "file": "posts/learning/Curtin/Y1S1/MATH1017/MATH1017 Advanced Calculus 1 Semester 1 2024 Bentley Perth Campus INT.pdf"
+              },
+              "icon": "lucide-file-text",
+              "title": "MATH1017 Advanced Calculus 1 Semester 1 2024 Bentley Perth Campus INT"
+            }
+          }
+        ]
       }
     ],
     "direction": "vertical"
@@ -288,59 +240,60 @@
       "graph:Open graph view": false,
       "templates:Insert template": false,
       "command-palette:Open command palette": false,
-      "table-editor-obsidian:Advanced Tables Toolbar": false,
-      "obsidian-excalidraw-plugin:Create new drawing": false,
       "obsidian-git:Open Git source control": false,
-      "templater-obsidian:Templater": false
+      "obsidian-kanban:Create new board": false,
+      "templater-obsidian:Templater": false,
+      "table-editor-obsidian:Advanced Tables Toolbar": false,
+      "obsidian-excalidraw-plugin:Create new drawing": false
     }
   },
-  "active": "f28c45769b89214a",
+  "active": "33d4dc1bf8a22b75",
   "lastOpenFiles": [
-    "out/templates/project/page/index.txt",
-    "out/templates/project/page/index.html",
-    "out/templates/project/page",
-    "out/templates/project/index.txt",
-    "out/templates/project/index.html",
-    "out/templates/project",
-    "out/setup/page/index.txt",
-    "out/setup/page/index.html",
-    "out/setup/page",
-    "out/setup/index.txt",
-    "out/setup/index.html",
-    "out/assets/Pasted image 20250103225209.png",
-    "out/assets/Pasted image 20250103225159.png",
-    "out/assets/Pasted image 20250103225135.png",
-    "out/assets/Pasted image 20250103161639.png",
-    "out/assets/Pasted image 20250103225145.png",
-    "out/assets/Pasted image 20250103225151.png",
-    "out/assets/Pasted image 20250103225121.png",
-    "out/assets/Pasted image 20250103225116.png",
-    "posts/projects/tacoz.me.md",
-    "posts/blog/1 Year of Anki told in Data.md",
-    "posts/projects/TacoBot.md",
-    "posts/projects/Untitled Mobile App.md",
-    "posts/templates/references.md",
-    "posts/templates/notes.md",
-    "posts/templates/general.md",
-    "posts/templates/learning.md",
-    "posts/blog/index.md",
-    "posts/blog/Rules.md",
-    "public/assets/Pasted image 20250103225209.png",
-    "public/assets/Pasted image 20250103225159.png",
+    "posts/learning/Curtin/Y1S1/ELEN1000/Electrical Engineering Principles and applications (Hambley, Allan R) (Z-Library).pdf",
+    "posts/learning/Curtin/Y1S1/ELEN1000",
+    "posts/learning/Curtin/Y1S1/ELEN/Electrical Engineering Principles and applications (Hambley, Allan R) (Z-Library).pdf",
+    "posts/learning/Curtin/Y1S1/ELEN",
+    "posts/learning/Curtin/Y1S1/COMP1005/ELEN/Electrical Engineering Principles and applications (Hambley, Allan R) (Z-Library).pdf",
+    "posts/learning/Curtin/Y1S1/COMP1005/ELEN",
+    "posts/learning/Curtin/Y1S1/COMP1005/COMP1005 Fundamentals of Programming Semester 1 2024 Bentley Perth Campus INT.pdf",
+    "posts/learning/Curtin/Y1S1/COMP1005/Lectures/3. Arrays and Plotting.md",
+    "posts/learning/Curtin/Y1S1/COMP1005/Lectures/12. Revision.md",
+    "posts/learning/Curtin/Y1S1/COMP1005/Lectures/11. Applications - Engineering and Science.md",
+    "posts/learning/Curtin/Y1S1/COMP1005/Lectures/10. Applications - Data Processing and Analytics.md",
+    "posts/learning/Curtin/Y1S1/COMP1005/Lectures/9. Software Development, Quality and Testing.md",
+    "posts/learning/Curtin/Y1S1/COMP1005/Lectures/8. Scripts and Automation.md",
+    "posts/learning/Curtin/Y1S1/COMP1005/Lectures/7. Object Relationships and Exception Handling.md",
+    "posts/learning/Curtin/Y1S1/COMP1005/Lectures/6. Modelling the World with Objects.md",
+    "posts/learning/Curtin/Y1S1/COMP1005/Lectures/5. Files and Grids.md",
+    "posts/learning/Curtin/Y1S1/COMP1005/Lectures/4. Multi-dimensional Arrays and Functions.md",
+    "posts/learning/Curtin/Y1S1/COMP1005/Lectures/2. Strings and Lists.md",
+    "posts/learning/Curtin/Y1S1/COMP1005/Lectures",
+    "posts/learning/Curtin/Y1S1/COMP1005/Lectures/1. Introduction to Linux and Python.md",
     "posts/learning/index.md",
-    "posts/projects/Abyss Media.md",
-    "posts/projects/startpage.md",
-    "posts/projects/jacaranda.md",
+    "posts/learning/Curtin/Y1S1/MATH1017",
+    "posts/learning/Curtin/Y1S1/COMP1005",
+    "posts/templates/references.md",
     "posts/templates/project.md",
+    "posts/templates/notes.md",
+    "posts/templates/learning.md",
+    "posts/templates/general.md",
+    "posts/blog/1 Year of Anki told in Data.md",
+    "posts/blog/index.md",
     "posts/references/index.md",
-    "posts/learning/Weekly Reflections.md",
+    "posts/projects/jacaranda.md",
+    "posts/projects/Abyss Media.md",
     "posts/notes/Books/index.md",
-    "posts/hello-world.md",
-    "posts/setup.md",
-    "posts/notes/index.md",
-    "node_modules/next-themes/README.md",
-    "node_modules/next-themes/license.md",
-    "node_modules/fsevents/README.md",
-    "posts/notes/inde.md"
+    "posts/projects/startpage.md",
+    "public/assets/Pasted Image 20250210155106_920.png",
+    "public/assets/Pasted Image 20250210155059_968.png",
+    "public/assets/Pasted Image 20250210155050_232.png",
+    "public/assets/Pasted image 20250116125657.png",
+    "public/assets/Pasted image 20250116125218.png",
+    "public/assets/Pasted image 20250116125102.png",
+    "public/assets/Pasted Image 20250116124912_253.png",
+    "Excalidraw",
+    "out/assets/ratepromo.png",
+    "out/assets/promo2.png",
+    "out/assets/promo1.png"
   ]
 }

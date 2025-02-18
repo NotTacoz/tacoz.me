@@ -24,7 +24,7 @@ warning: LOTS OF yapping because this is something i am quite passionate on
 
 Today marks my 1 year anniversary since starting Anki! Last year holidays I got into a Japanese grinding grindset (I told myself I would get an A that year - didn't turn out so great!) and initially started to review the basic vocabulary required for school and WACE. It was a year of ups and downs, where every day was a struggle to open this app and finish the deck, (many days I didn't). This covers my journey of starting Anki and my plans moving forward for Japanese (and other subjects)
 
-![](public/assets/Pasted%20image%2020250103225135.png)
+![](../../assets/Pasted%20image%2020250103225135.png)
 
 ## Journey
 I initially started to review the basic vocabulary required for school and WACE as I've always found myself weak vocabulary wise. I just imported all the Education Perfect words onto one deck, and started doing 10-20 new cards a day, and focusing on doing my reviews. The cards were VERY simple, and at that time, I had a back and front card, because I believed that recognition and output is different. It is incredibly hilarious to look back at myself a year ago, making many mistakes, and exclusively using the Again/Easy instead of Again/Good!

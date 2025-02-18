@@ -1,8 +1,11 @@
 [
-  "table-editor-obsidian",
+  "obsidian-git",
+  "obsidian-kanban",
+  "obsidian-latex-suite",
+  "templater-obsidian",
   "better-word-count",
   "creases",
-  "obsidian-excalidraw-plugin",
-  "obsidian-git",
-  "templater-obsidian"
+  "auto-note-mover",
+  "table-editor-obsidian",
+  "obsidian-excalidraw-plugin"
 ]

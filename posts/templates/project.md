@@ -10,7 +10,4 @@ tags:
   - nextjs
 year: 2025
 ---
-
-  
-
 Rest of your project documentation...
