@@ -13,16 +13,32 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "posts/hello-world.md",
+                "file": "posts/blog/Rules.md",
                 "mode": "source",
                 "backlinks": false,
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "hello-world"
+              "title": "Rules"
+            }
+          },
+          {
+            "id": "8f648f4cec5b77cb",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "posts/blog/Making a Text Editor from Scratch in C.md",
+                "mode": "source",
+                "backlinks": false,
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Making a Text Editor from Scratch in C"
             }
           }
-        ]
+        ],
+        "currentTab": 1
       },
       {
         "id": "ff10a2ea6b304126",
@@ -162,8 +178,11 @@
       "obsidian-excalidraw-plugin:Create new drawing": false
     }
   },
-  "active": "6df6bda9cee706df",
+  "active": "8f648f4cec5b77cb",
   "lastOpenFiles": [
+    "posts/blog/Rules.md",
+    "posts/blog/Making a Text Editor from Scratch in C.md",
+    "posts/hello-world.md",
     "posts/learning/index.md",
     "posts/learning/Leetcode/Blind 75/Arrays & Hashing/index.md",
     "posts/learning/Leetcode/Blind 75/index.md",
@@ -177,7 +196,6 @@
     "posts/notes/Books/index.md",
     "posts/learning/Curtin/Y1S1/COMP1005/COMP1005 Fundamentals of Programming Semester 1 2024 Bentley Perth Campus INT.pdf",
     "posts/learning/Curtin/Y1S1/COMP1005/Lectures/10. Applications - Data Processing and Analytics.md",
-    "posts/blog/Rules.md",
     "posts/learning/Curtin/Y1S1/COMP1005/Lectures/3. Arrays and Plotting.md",
     "posts/learning/Curtin/Y1S1/MATH1017/MATH1017 Advanced Calculus 1 Semester 1 2024 Bentley Perth Campus INT.pdf",
     "posts/learning/Leetcode/Blind 75/Arrays & Hashing/242. Valid Anagram.cpp",
@@ -198,8 +216,6 @@
     "posts/learning/Curtin/Y1S1/COMP1005/Lectures/1. Introduction to Linux and Python.md",
     "posts/templates/references.md",
     "posts/templates/project.md",
-    "posts/templates/notes.md",
-    "posts/templates/learning.md",
     "public/assets/Pasted Image 20250210155106_920.png",
     "public/assets/Pasted Image 20250210155059_968.png",
     "public/assets/Pasted Image 20250210155050_232.png",
