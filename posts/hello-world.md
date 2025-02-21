@@ -8,9 +8,10 @@ This is my first blog post! Welcome to my digital garden where I share my though
 ## navigation
 wow! internal links. learn how to [setup](posts/setup.md)!? this is linking to a [folder (books)](posts/notes/Books/index.md)
 ## images
+Standard image: \!\[](../assets/GgDBKAZX0AAi8C5.jpeg)
 ![](../assets/GgDBKAZX0AAi8C5.jpeg)
 
-need a smaller image? no problem! use \[height](image url) to specify
+need a smaller image? no problem! use \[height](image url) to specify \!\[200](../assets/GgDBKAZX0AAi8C5.jpeg)
 ![200](../assets/GgDBKAZX0AAi8C5.jpeg)
 
 
@@ -32,3 +33,11 @@ need a smaller image? no problem! use \[height](image url) to specify
 
 ```javascript
 console.log('Hello, World!');
+```
+
+## Tables
+
+| Header 1 | Header 2 |
+| -------- | -------- |
+| Cell 1   | Cell 2   |
+| Cell 3   | Cell 4   |
