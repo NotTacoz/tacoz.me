@@ -123,43 +123,7 @@ const CustomBlockquote: React.FC<{ children: React.ReactNode }> = ({
       isCollapsible={calloutData.isCollapsible}
       defaultExpanded={calloutData.defaultExpanded}
     >
-      <ReactMarkdown
-        remarkPlugins={[remarkGfm]}
-        components={{
-          table: ({ children }) => (
-            <div className="overflow-x-auto my-4">
-              <table className="min-w-full divide-y divide-gray-200 border border-gray-200 dark:border-gray-700">
-                {children}
-              </table>
-            </div>
-          ),
-          thead: ({ children }) => (
-            <thead className="bg-gray-50 dark:bg-gray-800">{children}</thead>
-          ),
-          tbody: ({ children }) => (
-            <tbody className="bg-white divide-y divide-gray-200 dark:bg-gray-900 dark:divide-gray-700">
-              {children}
-            </tbody>
-          ),
-          tr: ({ children }) => (
-            <tr className="hover:bg-gray-50 dark:hover:bg-gray-800">
-              {children}
-            </tr>
-          ),
-          th: ({ children }) => (
-            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
-              {children}
-            </th>
-          ),
-          td: ({ children }) => (
-            <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-300">
-              {children}
-            </td>
-          ),
-        }}
-      >
-        {calloutData.content}
-      </ReactMarkdown>
+      <ReactMarkdown>{calloutData.content}</ReactMarkdown>
     </Callout>
   );
 };
