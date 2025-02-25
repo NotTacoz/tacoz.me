@@ -15,8 +15,8 @@
               "state": {
                 "file": "posts/blog/Rules.md",
                 "mode": "source",
-                "backlinks": false,
-                "source": false
+                "source": false,
+                "backlinks": false
               },
               "icon": "lucide-file",
               "title": "Rules"
@@ -28,32 +28,28 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "posts/hello-world.md",
+                "file": "posts/learning/Curtin/Y1S1/COMP1005/Lectures/1. Introduction to Linux and Python.md",
                 "mode": "source",
-                "backlinks": false,
-                "source": false
+                "source": false,
+                "backlinks": false
               },
               "icon": "lucide-file",
-              "title": "hello-world"
+              "title": "1. Introduction to Linux and Python"
             }
-          }
-        ],
-        "currentTab": 1
-      },
-      {
-        "id": "ff10a2ea6b304126",
-        "type": "tabs",
-        "children": [
+          },
           {
-            "id": "33d4dc1bf8a22b75",
+            "id": "c4a8e478ead55f5a",
             "type": "leaf",
             "state": {
-              "type": "pdf",
+              "type": "markdown",
               "state": {
-                "file": "posts/learning/Curtin/Y1S1/MATH1017/MATH1017 Advanced Calculus 1 Semester 1 2024 Bentley Perth Campus INT.pdf"
+                "file": "posts/blog/Making a Text Editor from Scratch in C.md",
+                "mode": "source",
+                "source": false,
+                "backlinks": false
               },
-              "icon": "lucide-file-text",
-              "title": "MATH1017 Advanced Calculus 1 Semester 1 2024 Bentley Perth Campus INT"
+              "icon": "lucide-file",
+              "title": "Making a Text Editor from Scratch in C"
             }
           }
         ]
@@ -75,7 +71,8 @@
             "state": {
               "type": "file-explorer",
               "state": {
-                "sortOrder": "alphabetical"
+                "sortOrder": "alphabetical",
+                "autoReveal": false
               },
               "icon": "lucide-folder-closed",
               "title": "Files"
@@ -178,29 +175,35 @@
       "obsidian-excalidraw-plugin:Create new drawing": false
     }
   },
-  "active": "8f648f4cec5b77cb",
+  "active": "6df6bda9cee706df",
   "lastOpenFiles": [
-    "posts/setup.md",
+    "posts/learning/Curtin/Y1S1/COMP1005/Lectures/1. Introduction to Linux and Python.md",
+    "posts/blog/Making a Text Editor from Scratch in C.md",
+    "posts/learning/Curtin/Y1S1/PRRE1003/Lectures/Resources, Processes & Materials Engineering.md",
+    "posts/learning/Curtin/Y1S1/COMP1005/COMP1005 Fundamentals of Programming Semester 1 2025 Bentley Perth Campus INT (1).pdf",
+    "posts/learning/Curtin/Y1S1/PRRE1003/Lectures/~$rkshop.docx",
+    "posts/learning/Curtin/Y1S1/PRRE1003/Lectures/Workshop.docx",
+    "posts/learning/Curtin/Y1S1/ELEN1000/ELEN1000 Electrical Systems Semester 1 2025 Bentley Perth Campus INT.pdf",
+    "posts/learning/Curtin/Y1S1/PRRE1003/Michael F. Ashby, Hugh Shercliff, David Cebon - Materials_ Engineering, Science, Processing and Design-Butterworth-Heinemann (2018).epub",
+    "public/assets/Pasted image 20250224124109.png",
+    "posts/learning/Curtin/Y1S1/PRRE1003/PRRE1003 Resources, Processes and Materials Engineering Semester 1 2025 Bentley Perth Campus INT (1).pdf",
+    "posts/learning/Curtin/Y1S1/PRRE1003/Lectures",
+    "posts/learning/Curtin/Y1S1/ELEN1000/Lectures/Week 1 - Of Electricity and Other Magic.md",
+    "public/assets/Pasted image 20250224100448.png",
+    "posts/learning/Curtin/Y1S1/ELEN1000/Lectures",
+    "posts/learning/Curtin/Y1S1/MATH1017/Lectures/Untitled.md",
+    "posts/learning/Curtin/Y1S1/PRRE1003",
+    "posts/learning/Curtin/Y1S1/MATH1017/MATH1017 Advanced Calculus 1 Semester 1 2024 Bentley Perth Campus INT.pdf",
     "posts/hello-world.md",
+    "posts/setup.md",
     "posts/templates/project.md",
     "posts/learning/index.md",
-    "node_modules/mdast-util-to-markdown/lib/util/pattern-compile.d.ts",
-    "node_modules/mdast-util-to-markdown/lib/util/check-bullet-ordered-other.d.ts",
-    "node_modules/mdast-util-to-markdown/lib/util/pattern-compile.js",
-    "node_modules/mdast-util-to-markdown/lib/util/check-bullet-ordered-other.js",
     "node_modules/mdast-util-find-and-replace/node_modules/escape-string-regexp/readme.md",
-    "node_modules/mdast-util-find-and-replace/node_modules/escape-string-regexp/package.json",
-    "node_modules/mdast-util-find-and-replace/node_modules/escape-string-regexp/license",
-    "node_modules/mdast-util-find-and-replace/node_modules/escape-string-regexp/index.js",
-    "node_modules/mdast-util-find-and-replace/node_modules/escape-string-regexp/index.d.ts",
-    "node_modules/mdast-util-find-and-replace/node_modules/escape-string-regexp",
-    "node_modules/mdast-util-find-and-replace/lib/index.js",
     "node_modules/mdast-util-find-and-replace/readme.md",
     "node_modules/markdown-table/readme.md",
     "node_modules/longest-streak/readme.md",
     "node_modules/mdast-util-gfm/readme.md",
     "node_modules/mdast-util-gfm-autolink-literal/readme.md",
-    "posts/blog/Making a Text Editor from Scratch in C.md",
     "node_modules/remark-gfm/node_modules/micromark-core-commonmark/readme.md",
     "node_modules/mdast-util-gfm/node_modules/micromark-core-commonmark/readme.md",
     "node_modules/mdast-util-gfm-footnote/node_modules/micromark-core-commonmark/readme.md",
@@ -212,10 +215,6 @@
     "node_modules/mdast-util-gfm-task-list-item/node_modules/micromark-core-commonmark/readme.md",
     "node_modules/mdast-util-gfm-footnote/node_modules/micromark/readme.md",
     "node_modules/mdast-util-gfm-strikethrough/node_modules/micromark/readme.md",
-    "node_modules/mdast-util-to-markdown/readme.md",
-    "node_modules/mdast-util-gfm-table/node_modules/micromark/readme.md",
-    "node_modules/mdast-util-gfm-task-list-item/node_modules/micromark/readme.md",
-    "node_modules/remark-gfm/node_modules/vfile/readme.md",
     "node_modules/date-fns/docs/logotype.svg",
     "node_modules/date-fns/docs/logo.svg",
     "public/assets/Pasted Image 20250210155106_920.png",
@@ -223,8 +222,6 @@
     "public/assets/Pasted Image 20250210155050_232.png",
     "public/assets/Pasted image 20250116125657.png",
     "public/assets/Pasted image 20250116125218.png",
-    "public/assets/Pasted image 20250116125102.png",
-    "public/assets/Pasted Image 20250116124912_253.png",
-    "out/assets/ratepromo.png"
+    "public/assets/Pasted image 20250116125102.png"
   ]
 }
