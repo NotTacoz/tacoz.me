@@ -57,3 +57,18 @@ tags:
 - What is the unit of Energy?
 - What is the formula for Energy?
 - How is electrical bill calculated?
+
+## Tutorial
+- Apple
+- Fruit
+- Nutrition
+- Natural Sugar
+- Photography
+- Colours
+
+1. Read the question
+2. Identify the problem
+3. hypothesise a way of solving the problem
+4. solve it
+5. double check your answer
+
