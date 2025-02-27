@@ -4,11 +4,11 @@
     "type": "split",
     "children": [
       {
-        "id": "622af4383a9fdf38",
+        "id": "78e1727b819ace31",
         "type": "tabs",
         "children": [
           {
-            "id": "230ff812736d7acb",
+            "id": "b9b103f394087ebc",
             "type": "leaf",
             "state": {
               "type": "markdown",
@@ -79,8 +79,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300,
-    "collapsed": true
+    "width": 300
   },
   "right": {
     "id": "cf3c43442eb7742d",
@@ -146,13 +145,14 @@
       "obsidian-excalidraw-plugin:Create new drawing": false
     }
   },
-  "active": "230ff812736d7acb",
+  "active": "b9b103f394087ebc",
   "lastOpenFiles": [
+    "posts/learning/Curtin/Y1S1/MATH1017/Lectures/Logic and Set Theory.md",
+    "install.log",
     "public/assets/Pasted image 20250226123221.png",
     "posts/learning/Curtin/Y1S1/ELEN1000/Lectures/Week 1 - Of Electricity and Other Magic.md",
     "posts/learning/Curtin/Y1S1/ELEN1000/Electrical Engineering Principles and applications (Hambley, Allan R) (Z-Library).pdf",
     "posts/learning/Curtin/Y1S1/ELEN1000/ELEN1000 Electrical Systems Semester 1 2025 Bentley Perth Campus INT.pdf",
-    "posts/learning/Curtin/Y1S1/MATH1017/Lectures/Logic and Set Theory.md",
     "public/assets/Pasted image 20250226084749.png",
     "posts/blog/Making a Text Editor from Scratch in C.md",
     "posts/learning/Curtin/Y1S1/COMP1005/Lectures/1. Introduction to Linux and Python.md",
@@ -167,7 +167,6 @@
     "posts/learning/Curtin/Y1S1/PRRE1003/Lectures",
     "public/assets/Pasted image 20250224100448.png",
     "posts/learning/Curtin/Y1S1/ELEN1000/Lectures",
-    "posts/learning/Curtin/Y1S1/PRRE1003",
     "posts/hello-world.md",
     "posts/setup.md",
     "posts/templates/project.md",
@@ -192,7 +191,6 @@
     "public/assets/Pasted Image 20250210155106_920.png",
     "public/assets/Pasted Image 20250210155059_968.png",
     "public/assets/Pasted Image 20250210155050_232.png",
-    "public/assets/Pasted image 20250116125657.png",
-    "public/assets/Pasted image 20250116125218.png"
+    "public/assets/Pasted image 20250116125657.png"
   ]
 }
