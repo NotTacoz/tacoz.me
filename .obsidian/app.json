@@ -4,5 +4,6 @@
   "newFileLocation": "current",
   "newLinkFormat": "absolute",
   "attachmentFolderPath": "public/assets",
-  "useMarkdownLinks": true
+  "useMarkdownLinks": true,
+  "vimMode": true
 }

@@ -1,0 +1,136 @@
+---
+title: continuity
+date: 2025-04-05
+tags:
+  - learning
+  - lectures
+---
+- okay lets do this
+- lecture
+- i hate this already
+- hes getting a set of the real numbers with a limit
+	- a function that puts A -> R
+	- basic epsilon proof
+	- for all epsilon, there exists a epsilon (precision above 0)
+	- standard epsilon delta definition for every precision from the limit, there exists a limit that guarantees the precision
+- he then talks about convergent : converging functions
+	- he defines convergency as
+	- if there exists a limit such that a condition applies
+		- (same as epsilon-delta im pretty sure)
+- more restrictive (?). i think hes referring to limits idk
+- continuity is ONLY defined for points, no derived set
+	- what is a derived set
+		- subset of topological space set of all limit points contains infinity many points
+		- this still doesnt make sense to me
+		- derived set A' are all limit points in A
+	- epsilon-delta definiton again
+	- im not sure what hes trying to get at this?
+		- such there is only a small difference
+	- before he continues, he will explain the definition of contijnuity
+	- He takes a parabola and a point at x0. 
+	- he takes f(x0)
+	- definition is simple for continuity
+		- wouldnt work for discountinosu function
+	- i dnt really udnerstand what hes typing
+- he takes the function H(x) that jumps from 0 to 1 at x=0
+	- this is called the heavy side function
+	- why is this not continous.
+	- if he takes a epsilon around 1 (remember this is like region around the y at x=1)
+	- idk what hes talkign about 
+	- oh i get it because theres a point that is not in the epsilon?
+	- hes like writing but the lecture isnt updating
+	- oh nvm its updating
+- intuitively a continous function is such a pen is always on the paper and never leaves (but dats obvious fr)
+- 1) f is cont. if it is cont at x0, \forall x \in A
+	- this is saying continous if its continous at its limit
+	- something about locale definitions
+	- neighbourhood of f of age of 1??
+	- he is finding a neighbourhood of 1 so he can find value that is contained with that ? i dont really get it
+- taking epsilon at -2 of H(x) he can always find a value of a neighbourhood that is contained within the thing.
+- he now invites us to think abt it...  because its interesting. thanks teach.
+- explore the relationship with the result that makes it clear
+- A is in set R f: A -> R, x0 \in A
+	- x0 \in A \ D(A), (x0 is isolated)
+		- f is cont, at x0
+		- idk what hes talking abt rn tbh.
+		- isolated point as a point that is outside the range
+		- \[-1,1\] and 2, means 2 is the isolated point
+		- idk the point hes trying to make
+		- i dont really like the accent/his way of explaining
+		- but maybe im dumb.
+- if x0 \in A \intersect D(A) if x is a limit point (its saying x0 is NOT isolated), f cont at x0 <=> lim(x_>x0) f(x) exists and is equal to f(x0)
+- he now wants us to think about how to justify the first one
+- if you use r as the radius?/ what he talking about now
+	- intersection with a and 2 is a isolated point 
+	- hes just saying words bruh.
+	- f takes just a value of 2?
+- for every epsilon > 0, there exists delta > 0, 
+	- classic epsilon delta definition
+	- im not sure the justification. it is very confusing.
+	- are we meant to have all this in our brain.
+- "Result is trivially true: 
+	- If we consider isolated points, the function is automatically continues" ?? I have no idea what this mean is the lecturer just saying random shit or am i not undersrtanding it
+- this is so torteorous.
+	- we need to prove continuity is essentially at that point at the existence of the limit where the limit is x0. isnt x0 defined as the limit?
+- two claims to prove
+	- implication 1 assume f cont at x0
+		- there existas. bound such the distance between a point and the limit point is smaller than epsilon for all epsilon > 0
+		- he takes away x0 fromt eh thing. and the definition is same
+			- what?
+			- hes saying limit exists and is equal to l? what
+	- implication opposite: assuming f(x)) = lim(x->x0) f(x)??
+		- \\forall epsilon > 0 \exists \de,ta > 0: \forall x \in B(x0) \intersect A
+			- x != x0 => |f(x)-f(x0)|<\epsion
+		- inequality is true
+		- x0 is a point of a??
+		- bro im so lost hes saying random shit and im just typing it down
+		- trivially true. 
+- to repeat, he defines function continues at a point then f is continous
+	- f: A->R is cont if it is continous at x0 if \forall x0 \in A
+		- so its continous if its continous at every point??
+	- consequence of result we just proved
+	- i feel i get this
+	- x -> x^a where a>0. this is continous because limit exists?
+	- the asme is true for (0, +inf) -> R
+		- x|-> x^a a <0
+	- a >0 a^x is continous
+	- hes just fucking listing continous functions now
+	- like wtf i get that its continous what the f is ur point bruh
+	- nah im crashing out 1000 words and im only 20 min into this lecture
+- operations wtf
+	- stop stammering
+	- result is similar to result for limits
+	- A -> R where A \subset R, f + g and f \times g.
+	- why is he multiplying it and adding them
+	- this subject explaination fricking blows
+	- i feel like i should watch youtube videos with competent lecturers and crank the textbook with solved solutions
+	- am i stupid i never struggle with math
+	- this is so upsetting.
+	- advanced calc ...
+	- in order to be able to give a meaning to this (?))
+	- we need a core domain
+	- core domain addition
+	- same thing for multiplication
+	- hes defining multiplication
+	- a can be any set he wants?
+	- (sine + cosine) (x) = sin(x)+cos(x)
+		- sum of two graphs
+	- (sin.cos)(x) = sin(x).cos(x) bruh
+		- what hes talking about
+		- sum and product keeps it continous i guess? idfk
+	- (f-g)(x) = f(x) +(- g(x))
+	- f/g: A -> R, x+> f(x)/g(x), g(x) != 0, so the function doesnt break and becomes NOT defined
+- what
+- hes supposing that f.g: A->R, x0 \in A
+	- HES JUST JUMPING AROUND IDEK WHAT HES DOING HE DOESNT SAY WHAT HES DOING AM I CRAZY 
+- f + g is cont at x0 now talking about high school. f(x) is not a function it is a name of the function.  if f(x) = sin(x) sin is the function f is the NAME applied to the generic point, and these symbols (f?) is obsolote when denoting functions (so whats teh point?)
+- 2 fg is cont at x0
+- if g(x) != 0, \forall x \in A, f/g is cont at x0
+- first situation: x0 is isolated.
+- so hes saying that if f,g is continous then the addition multiplication and division are all cont at x0 (where x0 is any arbitrary point of the domain A)
+- x0 is isolated
+	- lim x->x0
+	- lim x->x0
+	- limit of sum is sum of limit (what)
+	- if x0 is a limi tpoint in the domain, blah bla alah
+- this might be the greatest waste of time of all time. 

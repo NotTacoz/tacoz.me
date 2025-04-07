@@ -4,11 +4,11 @@
     "type": "split",
     "children": [
       {
-        "id": "78e1727b819ace31",
+        "id": "88ca22200cbf74d7",
         "type": "tabs",
         "children": [
           {
-            "id": "b9b103f394087ebc",
+            "id": "28b9ae6705615510",
             "type": "leaf",
             "state": {
               "type": "markdown",
@@ -21,8 +21,54 @@
               "icon": "lucide-file",
               "title": "Logic and Set Theory"
             }
+          },
+          {
+            "id": "356ac703c0e2cb78",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "posts/learning/Curtin/Y1S1/MATH1017/Lectures/Logic and Set Theory.md",
+                "mode": "source",
+                "source": false,
+                "backlinks": false
+              },
+              "icon": "lucide-file",
+              "title": "Logic and Set Theory"
+            }
+          },
+          {
+            "id": "5d877ffa416d47e4",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "posts/learning/Curtin/Y1S1/PRRE1003/Lectures/Resources, Processes & Materials Engineering.md",
+                "mode": "source",
+                "source": false,
+                "backlinks": false
+              },
+              "icon": "lucide-file",
+              "title": "Resources, Processes & Materials Engineering"
+            }
+          },
+          {
+            "id": "ba02a786c71a1331",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "posts/learning/Curtin/Y1S1/PRRE1003/Lectures/P3 Mining.md",
+                "mode": "source",
+                "source": false,
+                "backlinks": false
+              },
+              "icon": "lucide-file",
+              "title": "P3 Mining"
+            }
           }
-        ]
+        ],
+        "currentTab": 3
       }
     ],
     "direction": "vertical"
@@ -79,7 +125,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300
+    "width": 296.5024719238281
   },
   "right": {
     "id": "cf3c43442eb7742d",
@@ -95,11 +141,12 @@
             "state": {
               "type": "outgoing-link",
               "state": {
+                "file": "posts/learning/Curtin/Y1S1/MATH1017/Lectures/continuity.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               },
               "icon": "links-going-out",
-              "title": "Outgoing links"
+              "title": "Outgoing links from continuity"
             }
           },
           {
@@ -129,7 +176,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300,
+    "width": 388.5,
     "collapsed": true
   },
   "left-ribbon": {
@@ -145,52 +192,53 @@
       "obsidian-excalidraw-plugin:Create new drawing": false
     }
   },
-  "active": "b9b103f394087ebc",
+  "active": "ba02a786c71a1331",
   "lastOpenFiles": [
+    "posts/learning/Curtin/Y1S1/PRRE1003/Lectures/Resources, Processes & Materials Engineering.md",
+    "posts/learning/Curtin/Y1S1/PRRE1003/Lectures/P3 Mining.md",
+    "posts/learning/Curtin/Y1S1/MATH1017/Lectures/continuity.md",
     "posts/learning/Curtin/Y1S1/MATH1017/Lectures/Logic and Set Theory.md",
-    "install.log",
-    "public/assets/Pasted image 20250226123221.png",
+    "interview  pre move (cqs).md",
+    "interview  pre move (comssa).md",
+    "posts/hello-world.md",
+    "posts/setup.md",
+    "computer systems programmers perspective.md",
+    "posts/learning/Curtin/Y1S1/MATH1017/Lectures/Week 6 Workshop.md",
+    "posts/blog/Trying to understand pointers.md",
+    "posts/blog/on becoming the best engineer.md",
+    "posts/learning/Curtin/Y1S1/ELEN1000/Lectures/Week 3 -.md",
+    "posts/learning/Curtin/Y1S1/ELEN1000/Lectures/Week 4.md",
+    "posts/blog/Untitled.md",
+    "public/assets/Pasted image 20250317082135.png",
     "posts/learning/Curtin/Y1S1/ELEN1000/Lectures/Week 1 - Of Electricity and Other Magic.md",
+    "Excalidraw/Drawing 2025-03-14 19.52.12.excalidraw.md",
+    "posts/learning/Curtin/Y1S1/ELEN1000/Lectures/Tutorial 1.md",
+    "posts/blog/index.md",
+    "posts/blog/1 Year of Anki told in Data.md",
+    "Excalidraw/Drawing 2025-03-06 15.22.42.excalidraw.md",
+    "Excalidraw/Drawing 2025-03-06 15.22.42_0.excalidraw.md",
+    "public/assets/Pasted Image 20250306152243_798.png",
+    "Excalidraw/Drawing 2025-03-04 23.12.20.excalidraw.md",
+    "public/assets/Pasted Image 20250304231608_657.png",
+    "public/assets/Pasted Image 20250304231507_940.png",
+    "public/assets/Pasted Image 20250304231431_232.png",
+    "public/assets/Pasted Image 20250304231342_018.png",
+    "public/assets/Pasted Image 20250304231238_573.png",
+    "public/assets/Pasted Image 20250304231222_051.png",
+    "Excalidraw/Drawing 2025-03-03 12.50.04.excalidraw.md",
+    "public/assets/Pasted Image 20250303130112_295.png",
+    "public/assets/Pasted Image 20250303125627_160.png",
+    "posts/learning/Weekly Reflections.md",
+    "Excalidraw/Drawing 2025-02-10 15.50.46.excalidraw.md",
+    "install.log",
     "posts/learning/Curtin/Y1S1/ELEN1000/Electrical Engineering Principles and applications (Hambley, Allan R) (Z-Library).pdf",
     "posts/learning/Curtin/Y1S1/ELEN1000/ELEN1000 Electrical Systems Semester 1 2025 Bentley Perth Campus INT.pdf",
-    "public/assets/Pasted image 20250226084749.png",
-    "posts/blog/Making a Text Editor from Scratch in C.md",
-    "posts/learning/Curtin/Y1S1/COMP1005/Lectures/1. Introduction to Linux and Python.md",
-    "posts/blog/Rules.md",
-    "posts/learning/Curtin/Y1S1/PRRE1003/Lectures/Resources, Processes & Materials Engineering.md",
     "posts/learning/Curtin/Y1S1/COMP1005/COMP1005 Fundamentals of Programming Semester 1 2025 Bentley Perth Campus INT (1).pdf",
     "posts/learning/Curtin/Y1S1/PRRE1003/Lectures/~$rkshop.docx",
     "posts/learning/Curtin/Y1S1/PRRE1003/Lectures/Workshop.docx",
     "posts/learning/Curtin/Y1S1/PRRE1003/Michael F. Ashby, Hugh Shercliff, David Cebon - Materials_ Engineering, Science, Processing and Design-Butterworth-Heinemann (2018).epub",
-    "public/assets/Pasted image 20250224124109.png",
     "posts/learning/Curtin/Y1S1/PRRE1003/PRRE1003 Resources, Processes and Materials Engineering Semester 1 2025 Bentley Perth Campus INT (1).pdf",
     "posts/learning/Curtin/Y1S1/PRRE1003/Lectures",
-    "public/assets/Pasted image 20250224100448.png",
-    "posts/learning/Curtin/Y1S1/ELEN1000/Lectures",
-    "posts/hello-world.md",
-    "posts/setup.md",
-    "posts/templates/project.md",
-    "posts/learning/index.md",
-    "node_modules/mdast-util-find-and-replace/node_modules/escape-string-regexp/readme.md",
-    "node_modules/mdast-util-find-and-replace/readme.md",
-    "node_modules/markdown-table/readme.md",
-    "node_modules/longest-streak/readme.md",
-    "node_modules/mdast-util-gfm/readme.md",
-    "node_modules/mdast-util-gfm-autolink-literal/readme.md",
-    "node_modules/remark-gfm/node_modules/micromark-core-commonmark/readme.md",
-    "node_modules/mdast-util-gfm/node_modules/micromark-core-commonmark/readme.md",
-    "node_modules/mdast-util-gfm-footnote/node_modules/micromark-core-commonmark/readme.md",
-    "node_modules/remark-gfm/node_modules/micromark/readme.md",
-    "node_modules/mdast-util-gfm-strikethrough/node_modules/micromark-core-commonmark/readme.md",
-    "node_modules/mdast-util-gfm-table/node_modules/micromark-core-commonmark/readme.md",
-    "node_modules/mdast-util-gfm/node_modules/micromark/readme.md",
-    "node_modules/micromark-extension-gfm-footnote/node_modules/micromark-core-commonmark/readme.md",
-    "node_modules/mdast-util-gfm-task-list-item/node_modules/micromark-core-commonmark/readme.md",
-    "node_modules/date-fns/docs/logotype.svg",
-    "node_modules/date-fns/docs/logo.svg",
-    "public/assets/Pasted Image 20250210155106_920.png",
-    "public/assets/Pasted Image 20250210155059_968.png",
-    "public/assets/Pasted Image 20250210155050_232.png",
-    "public/assets/Pasted image 20250116125657.png"
+    "posts/learning/Curtin/Y1S1/ELEN1000/Lectures"
   ]
 }
