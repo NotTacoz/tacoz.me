@@ -1,0 +1,89 @@
+---
+title: Untitled
+date: 2025-04-07
+tags:
+  - learning
+  - lectures
+---
+- not all material is required knowledge
+- looking at australia lots of commodities Woaw
+- copper other materials
+- renewable metals
+- metals in magnets
+- nickels
+- a lot of stuf found in center of state (wa australia)
+- lower and lower grades, more poorer quality, more complex to find. middle of nowhere, 
+- its hader to get
+- evolving legisilation
+- mning can not be done isolation
+- it must be low emission must be good for the citizen very good.
+- puppy looking in the mirror, challenges -> opportunity.
+- economical growth.
+- need for resources on emerging countries
+- renewable energy: escondica lots of copper and , and we want several of these copper plants to come onlien to meet it
+- geology - analysis, think about the next 6 months
+- mining engineering - safety ventilatoon adn logistics and production
+	- map out based on the ore body. should it be pitch or undergorund
+	- cutoff grade
+	- economics of it
+	- how much stress can a rock take and how stable it is
+	- how stable is the suppport system
+	- onitoriing
+- metallurgy - design, how to process,o pereation phase and do upgrades, continue to upgrade
+- struggling miner
+- no deposit is the same
+- every deposite is difference
+- just becuase there is grade doesn't mean it's economic
+- asx no way
+- mill on site admin and stuff
+- shortern distance
+- drill and blast, break rock with explosives BOOM
+- protect the staff if rock can not handle stress
+- intersect with water table with particularly deep mines
+- blow up under and rock falls wow
+- metallurgy beneficiation smelting refining (minecraft stuff)
+- comminution: crushing milling and grinding the rocks
+	- big rock to small rock!
+- 1-3 crushers at a time
+- leaching slective dissolution
+- purifyi g it: remove some of the impurity elements
+- emission: lots of roasters asthma avoid coming
+	- shutting down emissions
+	- roasters bad sulfur dioxide LOTS bad bad bad
+	- wether bad
+	- legislation change that gas being blown towards the population so operating time decreasing so they use a different type of roasting
+	- mm smart
+- 650 
+- iron sulfide convert to oxide no longer generate sulfur dioxide
+- dam are extremely common
+- sao paulo polluted 600km and killed a bunch of people
+- a lot of push to build dams with safety
+- filter it ands tack it and dry
+	- avoids mud sludge
+	- storage system
+	- stable for thousands fo years
+	- remediation: mobile metals in contaminated or mineralised areas water comings
+		- bring metals kills off very easily bio accumuilation
+		- highly tolerated
+		- promotes vegetarian
+		- ?? more ways to extract metal disturbance
+		- zero carbon footprint, when you burn you recover the metal
+		- the more produts we produce
+		- large scale renewable energy
+		- finite life contains massive amounts of metal
+		- to the point enormous amount
+		- circular economy yay!
+- reprocess materials yay
+- we can use these materials for contructon ! big legacies. Yes thanks
+- more arrows. more oppportunities to recyle
+- more waste streams to sned back
+- hence the ciruclar economy the full life cycle to get rid of any of the waste we are producing but like use it somehow so we get out of somethin 
+- what is phytomining
+	- mining metals from soil using plants
+- deposite shape composition.
+	- secondary resources
+	- dependent on process and waste material
+	- logistics
+	- social environmetnal factors ?w hat t dow hen you close your mine?
+	- all native flora/fauna that used to be there what happens there?
+- very interesting segment.
